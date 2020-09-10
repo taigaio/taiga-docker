@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  taiga-db:
+    image: postgres:12.3
+    environment:
+      POSTGRES_DB: taiga
+      POSTGRES_USER: taiga
+      POSTGRES_PASSWORD: taiga
+    networks:
+      - backend
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
+  taiga-back:
+    image: taiga-back:latest
+    environment:
+      DJANGO_SETTINGS_MODULE: "settings.config"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
+      - ./static-data:/taiga-back/static
+    networks:
+      - backend
+    depends_on:
+      - taiga-db
+
+networks:
+  backend:
