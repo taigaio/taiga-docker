@@ -7,6 +7,8 @@ services:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
+    ports:
+      - "5432:5432"
     networks:
       - backend
     volumes:
@@ -26,5 +28,15 @@ services:
     depends_on:
       - taiga-db
 
+  taiga-front:
+    image: ghcr.io/taigaio/taiga-front/taiga-front:5.5
+    ports:
+      - "9000:80"
+    volumes:
+      - ./taiga-front/conf/conf.json:/usr/share/nginx/html/conf.json
+    networks:
+      - frontend
+
 networks:
   backend:
+  frontend:
