@@ -9,8 +9,6 @@ services:
       POSTGRES_PASSWORD: taiga
     ports:
       - "5432:5432"
-    networks:
-      - backend
     volumes:
       - ./db-data:/var/lib/postgresql/data
 
@@ -23,8 +21,6 @@ services:
     volumes:
       - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
       - ./static-data:/taiga-back/static
-    networks:
-      - backend
     depends_on:
       - taiga-db
 
@@ -34,9 +30,3 @@ services:
       - "9000:80"
     volumes:
       - ./taiga-front/conf/conf.json:/usr/share/nginx/html/conf.json
-    networks:
-      - frontend
-
-networks:
-  backend:
-  frontend:

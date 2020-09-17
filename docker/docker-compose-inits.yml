@@ -7,8 +7,6 @@ services:
       DJANGO_SETTINGS_MODULE: "settings.config"
     volumes:
       - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
-    networks:
-      - backend
     depends_on:
       - taiga-db
     entrypoint: "python manage.py migrate"
@@ -20,8 +18,6 @@ services:
     volumes:
       - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
       - ./static-data:/taiga-back/static
-    networks:
-      - backend
     entrypoint: "python manage.py collectstatic --no-input"
 
   taiga-sampledata:
@@ -30,8 +26,6 @@ services:
       DJANGO_SETTINGS_MODULE: "settings.config"
     volumes:
       - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
-    networks:
-      - backend
     depends_on:
       - taiga-db
     entrypoint: bash -c "python manage.py loaddata initial_user && python manage.py loaddata initial_project_templates && python manage.py sample_data"
@@ -43,8 +37,6 @@ services:
     volumes:
       - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
       - ./static-data:/taiga-back/static
-    networks:
-      - backend
     depends_on:
       - taiga-db
     entrypoint: "python manage.py"
