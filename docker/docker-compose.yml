@@ -13,7 +13,7 @@ services:
       - ./db-data:/var/lib/postgresql/data
 
   taiga-back:
-    image: ghcr.io/taigaio/taiga-back/taiga-back:5.5
+    image: taigaio/taiga-back:alpha
     environment:
       DJANGO_SETTINGS_MODULE: "settings.config"
     ports:
@@ -25,7 +25,7 @@ services:
       - taiga-db
 
   taiga-front:
-    image: ghcr.io/taigaio/taiga-front/taiga-front:5.5
+    image: taigaio/taiga-front:alpha
     ports:
       - "9000:80"
     volumes:
