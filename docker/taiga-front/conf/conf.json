@@ -17,7 +17,9 @@
     "termsOfServiceUrl": null,
     "GDPRUrl": null,
     "maxUploadFileSize": null,
-    "contribPlugins": [],
+    "contribPlugins": [
+      "/plugins/slack/slack.json"
+    ],
     "tagManager": { "accountId": null },
     "tribeHost": null,
     "importers": [],
