@@ -38,6 +38,11 @@ DATABASES = {
     }
 }
 
+MEDIA_URL = "http://localhost:9000/media/"
+STATIC_URL = "http://localhost:9000/static/"
+SITES["api"] = {
+    "domain": "localhost:9000", "scheme": "http", "name": "api"
+}
 
 #########################################
 ## CONTRIBS

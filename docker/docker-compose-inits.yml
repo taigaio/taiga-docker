@@ -1,25 +1,6 @@
 version: "3.8"
 
 services:
-  taiga-migrate:
-    image: taigaio/taiga-back:alpha
-    environment:
-      DJANGO_SETTINGS_MODULE: "settings.config"
-    volumes:
-      - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
-    depends_on:
-      - taiga-db
-    entrypoint: "python manage.py migrate"
-
-  taiga-collectstatic:
-    image: taigaio/taiga-back:alpha
-    environment:
-      DJANGO_SETTINGS_MODULE: "settings.config"
-    volumes:
-      - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
-      - ./static-data:/taiga-back/static
-    entrypoint: "python manage.py collectstatic --no-input"
-
   taiga-sampledata:
     image: taigaio/taiga-back:alpha
     environment:
@@ -28,7 +9,7 @@ services:
       - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
     depends_on:
       - taiga-db
-    entrypoint: bash -c "python manage.py loaddata initial_user && python manage.py loaddata initial_project_templates && python manage.py sample_data"
+    entrypoint: bash -c "python manage.py sample_data"
 
   taiga-manage:
     image: taigaio/taiga-back:alpha
@@ -36,7 +17,6 @@ services:
       DJANGO_SETTINGS_MODULE: "settings.config"
     volumes:
       - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
-      - ./static-data:/taiga-back/static
     depends_on:
       - taiga-db
     entrypoint: "python manage.py"
