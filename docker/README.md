@@ -11,23 +11,23 @@ Additionally, it's necessary to have familiarity with Docker, docker-compose and
 - share a configuration file (see example in `taiga-back/settings`) and set the proper `DJANGO_SETTINGS_MODULE` envvar
 - modify `docker-compose.yml` as needed
 
+## Up
+
+```sh
+$ docker-compose up -d
+```
+
+Default port for the application is 9000.
+
 ## One shot commands
 
 ```sh
 $ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage [COMMAND]
 ```
 
-## Up
+## Sample data
 
-```sh
-$ docker-compose up -d
-$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-migrate
-$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-collectstatic
-```
-
-This command, optional, creates an initial user (admin / 123123) and some sample data to test the environment.
+This command, optional, some sample data to test the environment. It's important to run it **after running once the application** (which applies migrations). Otherwise, this command will fail.
 ```sh
 $ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-sampledata
 ```
-
-Back/API exposes port 8000
