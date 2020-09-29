@@ -6,18 +6,54 @@ Docker and docker-compose
 
 Additionally, it's necessary to have familiarity with Docker, docker-compose and Docker repositories
 
-## Customization
+## Simple customization
 
-- share a configuration file (see example in `taiga-back/settings`) and set the proper `DJANGO_SETTINGS_MODULE` envvar
-- modify `docker-compose.yml` as needed
+There are some environment variables for a simple customization. Find them in the `docker-compose.yml`. The images are ready to work out of the box, although is strongly recommended to change some default values.
 
-## Up
+### Database: taiga-db
+
+`POSTGRES_DB`, `POSTGRES_USER` and `POSTGRES_PASSWORD`. This vars will be used to create the database for Taiga.
+
+**Important**: these vars should have the same values as `taiga-back` vars.
+
+### API and Admin: taiga-back
+
+`POSTGRES_DB`, `POSTGRES_USER` and `POSTGRES_PASSWORD`. This vars will be used to connect to the Taiga database.
+
+**Important**: these vars should have the same values as `taiga-db` vars.
+
+Besides, `POSTGRES_HOST` where the database is set. By default, it's meant to be in the same host as the database service so it uses internal docker names.
+
+`TAIGA_PORT` should be the same as the exposed port in the `taiga-gateway`. Default is 9000.
+
+## Complex customization
+
+For a complex customization, you can use configuration files, mapped to a specific directories inside the containers.
+
+### API and Admin: taiga-back
+
+Map a Python configuration file to `/taiga-back/settings/config.py`. You can use (this file)[https://github.com/taigaio/taiga-back/blob/taiga-6/docker/config.py] as an example.
+
+**Important**: if you use your own configuration file, don't forget to add contribs to `INSTALLED_APPS` (check the example `config.py`).
+
+## Before running
+
+You have to configure an admin user:
+```sh
+# ensure migrations are properly set
+$ docker-compose up -d
+
+$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage loaddata initial_user
+# this command creates an admin/123123 user. Change it as soon as possible.
+```
+
+## Up and running
 
 ```sh
 $ docker-compose up -d
 ```
 
-Default port for the application is 9000.
+Default access for the application is **http://localhost:9000**.
 
 ## One shot commands
 
@@ -28,6 +64,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taig
 ## Sample data
 
 This command, optional, some sample data to test the environment. It's important to run it **after running once the application** (which applies migrations). Otherwise, this command will fail.
+
 ```sh
 $ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-sampledata
 ```

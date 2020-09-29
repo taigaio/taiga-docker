@@ -8,14 +8,17 @@ services:
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
     volumes:
-      - ./db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
 
   taiga-back:
     image: taigaio/taiga-back:alpha
     environment:
-      DJANGO_SETTINGS_MODULE: "settings.config"
+      POSTGRES_DB: taiga
+      POSTGRES_USER: taiga
+      POSTGRES_PASSWORD: taiga
+      POSTGRES_HOST: taiga-db
+      TAIGA_PORT: 9000
     volumes:
-      - ./taiga-back/settings/config.py:/taiga-back/settings/config.py
       - static-data:/taiga-back/static
       - media-data:/taiga-back/media
     depends_on:
@@ -40,3 +43,4 @@ services:
 volumes:
   static-data:
   media-data:
+  db-data:
