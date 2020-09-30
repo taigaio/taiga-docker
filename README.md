@@ -26,6 +26,10 @@ Besides, `POSTGRES_HOST` where the database is set. By default, it's meant to be
 
 `TAIGA_PORT` should be the same as the exposed port in the `taiga-gateway`. Default is 9000.
 
+### Front: taiga-front
+
+`TAIGA_PORT` should be the same as the exposed port in the `taiga-gateway`. Default is 9000.
+
 ## Complex customization
 
 For a complex customization, you can use configuration files, mapped to a specific directories inside the containers.
@@ -35,6 +39,10 @@ For a complex customization, you can use configuration files, mapped to a specif
 Map a Python configuration file to `/taiga-back/settings/config.py`. You can use (this file)[https://github.com/taigaio/taiga-back/blob/taiga-6/docker/config.py] as an example.
 
 **Important**: if you use your own configuration file, don't forget to add contribs to `INSTALLED_APPS` (check the example `config.py`).
+
+### Front: taiga-front
+
+Map a `conf.json`configuration file to `/usr/share/nginx/html/conf.json`. You can use (this file)[https://github.com/taigaio/taiga-front/blob/taiga-6/docker/conf.json.template] as an example.
 
 ## Before running
 

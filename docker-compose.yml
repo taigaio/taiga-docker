@@ -26,8 +26,8 @@ services:
 
   taiga-front:
     image: taigaio/taiga-front:alpha
-    volumes:
-      - ./taiga-front/conf/conf.json:/usr/share/nginx/html/conf.json
+    environment:
+      TAIGA_PORT: 9000
 
   taiga-gateway:
     image: nginx:1.19-alpine
