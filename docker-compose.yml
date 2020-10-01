@@ -18,6 +18,9 @@ services:
       POSTGRES_PASSWORD: taiga
       POSTGRES_HOST: taiga-db
       TAIGA_PORT: 9000
+      TAIGA_SECRET_KEY: "taiga-back-secret-key"
+      RABBITMQ_USER: taiga
+      RABBITMQ_PASS: taiga
     volumes:
       - static-data:/taiga-back/static
       - media-data:/taiga-back/media
@@ -28,6 +31,21 @@ services:
     image: taigaio/taiga-front:alpha
     environment:
       TAIGA_PORT: 9000
+
+  taiga-events:
+    image: taigaio/taiga-events:alpha
+    environment:
+      RABBITMQ_USER: taiga
+      RABBITMQ_PASS: taiga
+      TAIGA_SECRET_KEY: "taiga-back-secret-key"
+
+  taiga-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
+      RABBITMQ_DEFAULT_USER: taiga
+      RABBITMQ_DEFAULT_PASS: taiga
+      RABBITMQ_DEFAULT_VHOST: taiga
 
   taiga-gateway:
     image: nginx:1.19-alpine

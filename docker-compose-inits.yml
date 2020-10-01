@@ -8,6 +8,7 @@ services:
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
       POSTGRES_HOST: taiga-db
+      TAIGA_SECRET_KEY: "taiga-back-secret-key"
       TAIGA_PORT: 9000
     depends_on:
       - taiga-db
@@ -20,6 +21,7 @@ services:
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
       POSTGRES_HOST: taiga-db
+      TAIGA_SECRET_KEY: "taiga-back-secret-key"
       TAIGA_PORT: 9000
     depends_on:
       - taiga-db

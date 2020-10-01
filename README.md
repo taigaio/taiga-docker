@@ -26,9 +26,19 @@ Besides, `POSTGRES_HOST` where the database is set. By default, it's meant to be
 
 `TAIGA_PORT` should be the same as the exposed port in the `taiga-gateway`. Default is 9000.
 
+`TAIGA_SECRET_KEY` should be the same as this var in `taiga-events`
+
+`RABBITMQ_USER` and `RABBITMQ_PASS` are used to leave messages in rabbitmq.
+
 ### Front: taiga-front
 
 `TAIGA_PORT` should be the same as the exposed port in the `taiga-gateway`. Default is 9000.
+
+### Events: taiga-events
+
+`TAIGA_SECRET_KEY` should be the same as this var in `taiga-back`
+
+`RABBITMQ_USER` and `RABBITMQ_PASS` are used to read messages from rabbitmq.
 
 ## Complex customization
 
