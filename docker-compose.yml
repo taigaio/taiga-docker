@@ -21,6 +21,10 @@ services:
       TAIGA_SECRET_KEY: "taiga-back-secret-key"
       RABBITMQ_USER: taiga
       RABBITMQ_PASS: taiga
+      # Get these in your profile https://github.com/settings/apps
+      # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
+      GITHUB_API_CLIENT_ID: "github-api-client-id"
+      GITHUB_API_CLIENT_SECRET: "github-api-client-secret"
     volumes:
       - static-data:/taiga-back/static
       - media-data:/taiga-back/media
@@ -31,6 +35,9 @@ services:
     image: taigaio/taiga-front:alpha
     environment:
       TAIGA_PORT: 9000
+      # Get these in your profile https://github.com/settings/apps
+      # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
+      GITHUB_CLIENT_ID: "github-client-id"
 
   taiga-events:
     image: taigaio/taiga-events:alpha
