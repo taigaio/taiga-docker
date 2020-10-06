@@ -7,6 +7,8 @@ services:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
+    ports:
+      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
 
@@ -17,7 +19,8 @@ services:
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
       POSTGRES_HOST: taiga-db
-      TAIGA_PORT: 9000
+      TAIGA_SITES_DOMAIN: "localhost:9000"
+      TAIGA_SITES_SCHEME: "http"
       TAIGA_SECRET_KEY: "taiga-back-secret-key"
       RABBITMQ_USER: taiga
       RABBITMQ_PASS: taiga
@@ -25,19 +28,32 @@ services:
       # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
       GITHUB_API_CLIENT_ID: "github-api-client-id"
       GITHUB_API_CLIENT_SECRET: "github-api-client-secret"
+      # Get these in your profile https://{YOUR-GITLAB}/profile/applications
+      # or in your organization profile https://{YOUR-GITLAB}/admin/applications
+      GITLAB_API_CLIENT_ID: "gitlab-api-client-id"
+      GITLAB_API_CLIENT_SECRET: "gitlab-api-client-secret"
+      GITLAB_URL: "gitlab-url"
     volumes:
       - static-data:/taiga-back/static
       - media-data:/taiga-back/media
+      # - ./config.py:/taiga-back/settings/config.py:ro
     depends_on:
       - taiga-db
 
   taiga-front:
     image: taigaio/taiga-front:alpha
     environment:
-      TAIGA_PORT: 9000
+      TAIGA_URL: "http://localhost:9000"
+      TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
       # Get these in your profile https://github.com/settings/apps
       # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
       GITHUB_CLIENT_ID: "github-client-id"
+      # Get these in your profile https://{YOUR-GITLAB}/profile/applications
+      # or in your organization profile https://{YOUR-GITLAB}/admin/applications
+      GITLAB_CLIENT_ID: "gitlab-client-id"
+      GITLAB_URL: "gitlab-url"
+    # volumes:
+    #   - ./conf.json:/usr/share/nginx/html/conf.json:ro
 
   taiga-events:
     image: taigaio/taiga-events:alpha
