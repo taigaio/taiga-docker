@@ -1,28 +1,36 @@
 version: "3.8"
 
+x-environment:
+  &default-back-environment
+  POSTGRES_DB: taiga
+  POSTGRES_USER: taiga
+  POSTGRES_PASSWORD: taiga
+  POSTGRES_HOST: taiga-db
+  TAIGA_SECRET_KEY: "taiga-back-secret-key"
+  # these rabbitmq settings should be the same as
+  # in taiga-rabbitmq and taiga-events services
+  RABBITMQ_USER: taiga
+  RABBITMQ_PASS: taiga
+
+x-volumes:
+  &default-back-volumes
+  - static-data:/taiga-back/static
+  - media-data:/taiga-back/media
+  # - ./config.py:/taiga-back/settings/config.py:ro
+
 services:
   taiga-sampledata:
     image: taigaio/taiga-back:alpha
-    environment:
-      POSTGRES_DB: taiga
-      POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: taiga
-      POSTGRES_HOST: taiga-db
-      TAIGA_SECRET_KEY: "taiga-back-secret-key"
-      TAIGA_PORT: 9000
+    environment: *default-back-environment
     depends_on:
       - taiga-db
     entrypoint: bash -c "python manage.py sample_data"
+    volumes: *default-back-volumes
 
   taiga-manage:
     image: taigaio/taiga-back:alpha
-    environment:
-      POSTGRES_DB: taiga
-      POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: taiga
-      POSTGRES_HOST: taiga-db
-      TAIGA_SECRET_KEY: "taiga-back-secret-key"
-      TAIGA_PORT: 9000
+    environment: *default-back-environment
     depends_on:
       - taiga-db
     entrypoint: "python manage.py"
+    volumes: *default-back-volumes

@@ -1,5 +1,35 @@
 version: "3.8"
 
+x-environment:
+  &default-back-environment
+  POSTGRES_DB: taiga
+  POSTGRES_USER: taiga
+  POSTGRES_PASSWORD: taiga
+  POSTGRES_HOST: taiga-db
+  TAIGA_SITES_DOMAIN: "localhost:9000"
+  TAIGA_SITES_SCHEME: "http"
+  TAIGA_SECRET_KEY: "taiga-back-secret-key"
+  # these rabbitmq settings should be the same as
+  # in taiga-rabbitmq and taiga-events services
+  RABBITMQ_USER: taiga
+  RABBITMQ_PASS: taiga
+  # Get these in your profile https://github.com/settings/apps
+  # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
+  GITHUB_API_CLIENT_ID: "github-api-client-id"
+  GITHUB_API_CLIENT_SECRET: "github-api-client-secret"
+  # Get these in your profile https://{YOUR-GITLAB}/profile/applications
+  # or in your organization profile https://{YOUR-GITLAB}/admin/applications
+  GITLAB_API_CLIENT_ID: "gitlab-api-client-id"
+  GITLAB_API_CLIENT_SECRET: "gitlab-api-client-secret"
+  GITLAB_URL: "gitlab-url"
+
+
+x-volumes:
+  &default-back-volumes
+  - static-data:/taiga-back/static
+  - media-data:/taiga-back/media
+  # - ./config.py:/taiga-back/settings/config.py:ro
+
 services:
   taiga-db:
     image: postgres:12.3
@@ -7,38 +37,37 @@ services:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
-    ports:
-      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   taiga-back:
     image: taigaio/taiga-back:alpha
-    environment:
-      POSTGRES_DB: taiga
-      POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: taiga
-      POSTGRES_HOST: taiga-db
-      TAIGA_SITES_DOMAIN: "localhost:9000"
-      TAIGA_SITES_SCHEME: "http"
-      TAIGA_SECRET_KEY: "taiga-back-secret-key"
-      RABBITMQ_USER: taiga
-      RABBITMQ_PASS: taiga
-      # Get these in your profile https://github.com/settings/apps
-      # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
-      GITHUB_API_CLIENT_ID: "github-api-client-id"
-      GITHUB_API_CLIENT_SECRET: "github-api-client-secret"
-      # Get these in your profile https://{YOUR-GITLAB}/profile/applications
-      # or in your organization profile https://{YOUR-GITLAB}/admin/applications
-      GITLAB_API_CLIENT_ID: "gitlab-api-client-id"
-      GITLAB_API_CLIENT_SECRET: "gitlab-api-client-secret"
-      GITLAB_URL: "gitlab-url"
-    volumes:
-      - static-data:/taiga-back/static
-      - media-data:/taiga-back/media
-      # - ./config.py:/taiga-back/settings/config.py:ro
+    environment: *default-back-environment
+    volumes: *default-back-volumes
     depends_on:
       - taiga-db
+      - taiga-events-rabbitmq
+      - taiga-async-rabbitmq
+
+  taiga-async:
+    image: taigaio/taiga-back:alpha
+    entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
+    environment: *default-back-environment
+    volumes: *default-back-volumes
+    depends_on:
+      - taiga-db
+      - taiga-back
+      - taiga-async-rabbitmq
+
+  taiga-async-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
+      RABBITMQ_DEFAULT_USER: taiga
+      RABBITMQ_DEFAULT_PASS: taiga
+      RABBITMQ_DEFAULT_VHOST: taiga
 
   taiga-front:
     image: taigaio/taiga-front:alpha
@@ -61,8 +90,10 @@ services:
       RABBITMQ_USER: taiga
       RABBITMQ_PASS: taiga
       TAIGA_SECRET_KEY: "taiga-back-secret-key"
+    depends_on:
+      - taiga-events-rabbitmq
 
-  taiga-rabbitmq:
+  taiga-events-rabbitmq:
     image: rabbitmq:3-management-alpine
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
@@ -79,7 +110,9 @@ services:
       - static-data:/taiga/static
       - media-data:/taiga/media
     depends_on:
+      - taiga-front
       - taiga-back
+      - taiga-events
 
 volumes:
   static-data:
