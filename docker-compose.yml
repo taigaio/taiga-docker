@@ -2,13 +2,15 @@ version: "3.8"
 
 x-environment:
   &default-back-environment
+  # Database settings
   POSTGRES_DB: taiga
   POSTGRES_USER: taiga
   POSTGRES_PASSWORD: taiga
   POSTGRES_HOST: taiga-db
+  # Taiga settings
+  TAIGA_SECRET_KEY: "taiga-back-secret-key"
   TAIGA_SITES_DOMAIN: "localhost:9000"
   TAIGA_SITES_SCHEME: "http"
-  TAIGA_SECRET_KEY: "taiga-back-secret-key"
   # Email settings
   ENABLE_EMAIL: "False" # False -> console; True -> smtp
   DEFAULT_FROM_EMAIL: "no-reply@example.com"
@@ -19,7 +21,7 @@ x-environment:
   # EMAIL_HOST_USER: "user"
   # EMAIL_HOST_PASSWORD: "password"
   # Rabbitmq settings
-  # should be the same as in taiga-rabbitmq and taiga-events services
+  # should be the same as in taiga-async-rabbitmq and taiga-events-rabbitmq
   RABBITMQ_USER: taiga
   RABBITMQ_PASS: taiga
   # Github settings

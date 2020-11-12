@@ -19,14 +19,6 @@ x-volumes:
   # - ./config.py:/taiga-back/settings/config.py:ro
 
 services:
-  taiga-sampledata:
-    image: taigaio/taiga-back:alpha
-    environment: *default-back-environment
-    depends_on:
-      - taiga-db
-    entrypoint: bash -c "python manage.py sample_data"
-    volumes: *default-back-volumes
-
   taiga-manage:
     image: taigaio/taiga-back:alpha
     environment: *default-back-environment
