@@ -9,14 +9,25 @@ x-environment:
   TAIGA_SITES_DOMAIN: "localhost:9000"
   TAIGA_SITES_SCHEME: "http"
   TAIGA_SECRET_KEY: "taiga-back-secret-key"
-  # these rabbitmq settings should be the same as
-  # in taiga-rabbitmq and taiga-events services
+  # Email settings
+  ENABLE_EMAIL: "False" # False -> console; True -> smtp
+  DEFAULT_FROM_EMAIL: "no-reply@example.com"
+  # EMAIL_USE_TLS: "False"
+  # EMAIL_USE_SSL: "False"
+  # EMAIL_HOST: "smtp.host.example.com"
+  # EMAIL_PORT: 587
+  # EMAIL_HOST_USER: "user"
+  # EMAIL_HOST_PASSWORD: "password"
+  # Rabbitmq settings
+  # should be the same as in taiga-rabbitmq and taiga-events services
   RABBITMQ_USER: taiga
   RABBITMQ_PASS: taiga
+  # Github settings
   # Get these in your profile https://github.com/settings/apps
   # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
   GITHUB_API_CLIENT_ID: "github-api-client-id"
   GITHUB_API_CLIENT_SECRET: "github-api-client-secret"
+  # Gitlab settings
   # Get these in your profile https://{YOUR-GITLAB}/profile/applications
   # or in your organization profile https://{YOUR-GITLAB}/admin/applications
   GITLAB_API_CLIENT_ID: "gitlab-api-client-id"
