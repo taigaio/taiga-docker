@@ -14,8 +14,8 @@ x-environment:
 
 x-volumes:
   &default-back-volumes
-  - static-data:/taiga-back/static
-  - media-data:/taiga-back/media
+  - taiga-static-data:/taiga-back/static
+  - taiga-media-data:/taiga-back/media
   # - ./config.py:/taiga-back/settings/config.py:ro
 
 services:
@@ -26,3 +26,5 @@ services:
       - taiga-db
     entrypoint: "python manage.py"
     volumes: *default-back-volumes
+    networks:
+      - taiga

@@ -39,8 +39,8 @@ x-environment:
 
 x-volumes:
   &default-back-volumes
-  - static-data:/taiga-back/static
-  - media-data:/taiga-back/media
+  - taiga-static-data:/taiga-back/static
+  - taiga-media-data:/taiga-back/media
   # - ./config.py:/taiga-back/settings/config.py:ro
 
 services:
@@ -51,14 +51,16 @@ services:
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: taiga
     volumes:
-      - db-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      - taiga-db-data:/var/lib/postgresql/data
+    networks:
+      - taiga
 
   taiga-back:
     image: taigaio/taiga-back:alpha
     environment: *default-back-environment
     volumes: *default-back-volumes
+    networks:
+      - taiga
     depends_on:
       - taiga-db
       - taiga-events-rabbitmq
@@ -69,6 +71,8 @@ services:
     entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
     environment: *default-back-environment
     volumes: *default-back-volumes
+    networks:
+      - taiga
     depends_on:
       - taiga-db
       - taiga-back
@@ -81,6 +85,8 @@ services:
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: taiga
       RABBITMQ_DEFAULT_VHOST: taiga
+    networks:
+      - taiga
 
   taiga-front:
     image: taigaio/taiga-front:alpha
@@ -94,6 +100,8 @@ services:
       # or in your organization profile https://{YOUR-GITLAB}/admin/applications
       GITLAB_CLIENT_ID: "gitlab-client-id"
       GITLAB_URL: "gitlab-url"
+    networks:
+      - taiga
     # volumes:
     #   - ./conf.json:/usr/share/nginx/html/conf.json:ro
 
@@ -103,6 +111,8 @@ services:
       RABBITMQ_USER: taiga
       RABBITMQ_PASS: taiga
       TAIGA_SECRET_KEY: "taiga-back-secret-key"
+    networks:
+      - taiga
     depends_on:
       - taiga-events-rabbitmq
 
@@ -113,6 +123,8 @@ services:
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: taiga
       RABBITMQ_DEFAULT_VHOST: taiga
+    networks:
+      - taiga
 
   taiga-gateway:
     image: nginx:1.19-alpine
@@ -120,14 +132,19 @@ services:
       - "9000:80"
     volumes:
       - ./taiga-gateway/taiga.conf:/etc/nginx/conf.d/default.conf
-      - static-data:/taiga/static
-      - media-data:/taiga/media
+      - taiga-static-data:/taiga/static
+      - taiga-media-data:/taiga/media
+    networks:
+      - taiga
     depends_on:
       - taiga-front
       - taiga-back
       - taiga-events
 
 volumes:
-  static-data:
-  media-data:
-  db-data:
+  taiga-static-data:
+  taiga-media-data:
+  taiga-db-data:
+
+networks:
+  taiga:
