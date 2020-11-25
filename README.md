@@ -96,8 +96,7 @@ You have to configure an admin user:
 # ensure migrations are properly set
 $ docker-compose up -d
 
-$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage loaddata initial_user
-# this command creates an admin/123123 user. Change it as soon as possible.
+$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage createsuperuser
 ```
 
 ## Up and running
