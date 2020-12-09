@@ -31,13 +31,13 @@ This vars will be used to connect to the Taiga database.
 
 **Important**: these vars should have the same values as `taiga-db` service vars.
 
-##### `POSTGRES_HOST` 
+##### `POSTGRES_HOST`
 
 Where the database is set. By default, it's meant to be in the same host as the database service so it uses internal docker names.
 
 #### Taiga settings
 
-##### `TAIGA_SECRET_KEY` 
+##### `TAIGA_SECRET_KEY`
 
 Is the secret key of Taiga. Should be the same as this var in `taiga-events` and `taiga-async`
 
@@ -45,9 +45,17 @@ Is the secret key of Taiga. Should be the same as this var in `taiga-events` and
 
 Should have the url where this is served: https[://]taiga.mycompany.com
 
+#### Telemetry Settings
+
+Telemetry anonymous data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios.
+
+##### `ENABLE_TELEMETRY`
+
+You can opt out by setting this variable to "False". By default is "True".
+
 #### Email Settings
 
-By default, email is configured with the *console* backend, which means that the emails will be shown in the stdout.<br>
+By default, email is configured with the *console* backend, which means that the emails will be shown in the stdout.
 
 ##### `ENABLE_EMAIL`
 
@@ -96,14 +104,13 @@ Is the secret erlang cookie.
 
 This vars will be used to connect to rabbitmq.
 
-
 ### taiga-front
 
-##### `TAIGA_URL` 
+##### `TAIGA_URL`
 
 Where this Taiga instance should be served. It should be the same as `TAIGA_SITES_SCHEME`://`TAIGA_SITES_DOMAIN`.
 
-##### `TAIGA_WEBSOCKETS_URL` 
+##### `TAIGA_WEBSOCKETS_URL`
 
 To connect to the events. This should have the same value as `TAIGA_SITES_DOMAIN`, ie: ws://taiga.mycompany.com
 

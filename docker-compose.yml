@@ -20,6 +20,8 @@ x-environment:
   # EMAIL_PORT: 587
   # EMAIL_HOST_USER: "user"
   # EMAIL_HOST_PASSWORD: "password"
+  # Telemetry settings
+  ENABLE_TELEMETRY: "True"
   # Rabbitmq settings
   # should be the same as in taiga-async-rabbitmq and taiga-events-rabbitmq
   RABBITMQ_USER: taiga
@@ -54,6 +56,8 @@ services:
       - taiga-db-data:/var/lib/postgresql/data
     networks:
       - taiga
+    ports:
+      - "5432:5432"
 
   taiga-back:
     image: taigaio/taiga-back:alpha
