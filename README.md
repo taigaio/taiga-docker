@@ -45,6 +45,13 @@ Is the secret key of Taiga. Should be the same as this var in `taiga-events` and
 
 Should have the url where this is served: https[://]taiga.mycompany.com
 
+#### Registration Settings
+
+##### `PUBLIC_REGISTER_ENABLED`
+
+If you want to allow a public register, configure this variable to "True". By default is "False".
+Should be the same as this var in `taiga-front`.
+
 #### Telemetry Settings
 
 Telemetry anonymous data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios.
@@ -113,6 +120,11 @@ Where this Taiga instance should be served. It should be the same as `TAIGA_SITE
 ##### `TAIGA_WEBSOCKETS_URL`
 
 To connect to the events. This should have the same value as `TAIGA_SITES_DOMAIN`, ie: ws://taiga.mycompany.com
+
+##### `PUBLIC_REGISTER_ENABLED`
+
+If you want to allow a public register, configure this variable to "true". By default is "false".
+Should be the same as this var in `taiga-back`.
 
 ##### `GITHUB_CLIENT_ID`
 
