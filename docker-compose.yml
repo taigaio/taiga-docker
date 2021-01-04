@@ -20,6 +20,8 @@ x-environment:
   # EMAIL_PORT: 587
   # EMAIL_HOST_USER: "user"
   # EMAIL_HOST_PASSWORD: "password"
+  # Registration
+  PUBLIC_REGISTER_ENABLED: "False"
   # Telemetry settings
   ENABLE_TELEMETRY: "True"
   # Rabbitmq settings
@@ -97,6 +99,7 @@ services:
     environment:
       TAIGA_URL: "http://localhost:9000"
       TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
+      PUBLIC_REGISTER_ENABLED: "false"
       # Get these in your profile https://github.com/settings/apps
       # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
       GITHUB_CLIENT_ID: "github-client-id"
