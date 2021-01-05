@@ -41,6 +41,8 @@ Where the database is set. By default, it's meant to be in the same host as the 
 
 Is the secret key of Taiga. Should be the same as this var in `taiga-events` and `taiga-async`
 
+Besides, this should have the same value of `SECRET_KEY` in `taiga-protected`.
+
 ##### `TAIGA_SITES_SCHEME`, `TAIGA_SITES_DOMAIN`
 
 Should have the url where this is served: https[://]taiga.mycompany.com
@@ -135,6 +137,16 @@ Get these in your profile https://github.com/settings/apps or in your organizati
 
 Used for login with GitLab.
 Get these in your profile https://{YOUR-GITLAB}/profile/applications or in your organization profile https://{YOUR-GITLAB}/admin/applications
+
+### taiga-protected
+
+##### `SECRET_KEY`
+
+Should be the same as this var in `taiga-back`.
+
+##### `MAX_AGE`
+
+The attachments will be accesible with a token during MAX_AGE (in seconds). After that, the token will expire.
 
 
 ### taiga-events

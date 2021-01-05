@@ -133,6 +133,14 @@ services:
     networks:
       - taiga
 
+  taiga-protected:
+    image: taigaio/taiga-protected:alpha
+    environment:
+      MAX_AGE: 360
+      SECRET_KEY: "taiga-back-secret-key"
+    networks:
+      - taiga
+
   taiga-gateway:
     image: nginx:1.19-alpine
     ports:
