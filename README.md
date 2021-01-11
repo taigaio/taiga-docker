@@ -222,15 +222,15 @@ Map a `conf.json`configuration file to `/usr/share/nginx/html/conf.json`. You ca
 You have to configure an admin user:
 ```sh
 # ensure migrations are properly set
-$ docker-compose up -d
-
-$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage createsuperuser
+$ ./launch-all.sh
+$ ./taiga-manage.sh createsuperuser
 ```
 
 ## Up and running
 
+
 ```sh
-$ docker-compose up -d
+$ ./launch-all.sh
 ```
 
 Default access for the application is **http://localhost:9000**.
@@ -238,8 +238,8 @@ Default access for the application is **http://localhost:9000**.
 
 ## One shot commands
 
-`docker-compose-inits.yml` lets launch manage.py commands on the back instance:
+`taiga-manage.sh` lets launch manage.py commands on the back instance:
 
 ```sh
-$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage [COMMAND]
+$ ./taiga-manage.sh [COMMAND]
 ```
