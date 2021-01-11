@@ -11,6 +11,7 @@ x-environment:
   # in taiga-rabbitmq and taiga-events services
   RABBITMQ_USER: taiga
   RABBITMQ_PASS: taiga
+  CELERY_ENABLED: "False"
 
 x-volumes:
   &default-back-volumes
