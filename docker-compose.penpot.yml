@@ -1,0 +1,119 @@
+---
+version: "3.5"
+
+networks:
+  penpot:
+
+volumes:
+  penpot_postgres_data:
+  penpot_assets_data:
+
+services:
+  penpot-frontend:
+    image: "penpotapp/frontend:develop"
+    ports:
+      - 9001:80
+
+    volumes:
+      - penpot_assets_data:/opt/data
+
+    depends_on:
+      - penpot-backend
+      - penpot-exporter
+    networks:
+      - penpot
+
+  penpot-backend:
+    image: "penpotapp/backend:develop"
+    volumes:
+      - penpot_assets_data:/opt/data
+
+    depends_on:
+      - penpot-postgres
+      - penpot-redis
+
+    environment:
+      # Used for creating tokens, important to be true random value
+      - PENPOT_SECRET_KEY=provide-here-a-secret-random-key
+
+      # Should be set to the public domain when penpot is going to be
+      # served.
+      - PENPOT_PUBLIC_URI=http://localhost
+
+      # Standard database connection parametes (only postgresql is supported):
+      - PENPOT_DATABASE_URI=postgresql://penpot-postgres/penpot
+      - PENPOT_DATABASE_USERNAME=penpot
+      - PENPOT_DATABASE_PASSWORD=penpot
+
+      # Redis is used for the websockets notifications.
+      - PENPOT_REDIS_URI=redis://penpot-redis/0
+
+      # By default files upload by user are stored in local
+      # filesystem. But it can be configured to store in AWS S3 or
+      # completelly in de the database. Storing in the database makes
+      # the backups more easy but will make access to media less
+      # performant.
+      - PENPOT_STORAGE_BACKEND=fs
+      - PENPOT_STORAGE_FS_DIRECTORY_=/opt/data/assets
+      - PENPOT_LOCAL_ASSETS_URI=http://penpot-frontend/internal/assets
+
+      # Telemetry. When enabled, a periodical process will send
+      # annonymous data about this instance. Telemetry data will
+      # enable us to learn on how the application is used based on
+      # real scenarios. If you want to help us, please leave it
+      # enabled. In any case you can see the source code of both
+      # client and server in the penpot repository.
+      - PENPOT_TELEMETRY_ENABLED=true
+      - PENPOT_TELEMETRY_WITH_TAIGA=true
+
+      # Email sending configuration. By default emails are printed in
+      # console, but for production usage is recommeded to setup a
+      # real SMTP provider. Emails are used for confirm user
+      # registration.
+      - PENPOT_SMTP_ENABLED=false
+      - PENPOT_SMTP_DEFAULT_FROM=no-reply@example.com
+      - PENPOT_SMTP_DEFAULT_REPLY_TO=no-reply@example.com
+      # - PENPOT_SMTP_HOST=...
+      # - PENPOT_SMTP_PORT=...
+      # - PENPOT_SMTP_USERNAME=...
+      # - PENPOT_SMTP_PASSWORD=...
+      # - PENPOT_SMTP_TLS=true
+      # - PENPOT_SMTP_SSL=false
+
+      - PENPOT_ASSERTS_ENABLED=false
+      - PENPOT_DEBUG=false
+
+    networks:
+      - penpot
+
+  penpot-exporter:
+    image: "penpotapp/exporter:develop"
+    environment:
+      # Don't touch it; this uses internal docker network to
+      # communicate with the frontend.
+      - PENPOT_PUBLIC_URI=http://penpot-frontend
+    networks:
+      - penpot
+
+  penpot-postgres:
+    image: "postgres:13"
+    restart: always
+    stop_signal: SIGINT
+
+    environment:
+      - POSTGRES_INITDB_ARGS=--data-checksums
+      - POSTGRES_DB=penpot
+      - POSTGRES_USER=penpot
+      - POSTGRES_PASSWORD=penpot
+
+    volumes:
+      - penpot_postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - penpot
+
+  penpot-redis:
+    image: redis:6
+    restart: always
+    networks:
+      - penpot
