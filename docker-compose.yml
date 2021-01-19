@@ -11,9 +11,9 @@ x-environment:
   TAIGA_SECRET_KEY: "taiga-back-secret-key"
   TAIGA_SITES_DOMAIN: "localhost:9000"
   TAIGA_SITES_SCHEME: "http"
-  # Email settings
-  ENABLE_EMAIL: "False" # False -> console; True -> smtp
-  DEFAULT_FROM_EMAIL: "no-reply@example.com"
+  # Email settings. Uncomment following lines and configure your SMTP server
+  # EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
+  # DEFAULT_FROM_EMAIL: "no-reply@example.com"
   # EMAIL_USE_TLS: "False"
   # EMAIL_USE_SSL: "False"
   # EMAIL_HOST: "smtp.host.example.com"
