@@ -66,21 +66,13 @@ You can opt out by setting this variable to "False". By default is "True".
 
 By default, email is configured with the *console* backend, which means that the emails will be shown in the stdout.
 
-##### `ENABLE_EMAIL`
+##### Enable SMTP email
 
-If you have an smtp service, configure this variable to "True". By default is "False".
+If you have an smtp service, uncomment the "Email settings" section in `docker-compose.yml` and configure those environment variables:
 
-##### `DEFAULT_FROM_EMAIL`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`
+`DEFAULT_FROM_EMAIL`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `EMAIL_USE_TLS`, `EMAIL_USE_SSL`.
 
-If you have an smtp service configure this variables too.
-
-##### `EMAIL_USE_TLS`
-
-If you use TLS, configure this variable to "True". By default is "False".
-
-##### `EMAIL_USE_SSL`
-
-If you use SSL, configure this variable to "True". By default is "False".
+Uncomment `EMAIL_BACKEND` variable, but do not modify unless you know what you're doing.
 
 #### Rabbit settings
 
