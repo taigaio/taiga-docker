@@ -9,8 +9,9 @@ Additionally, it's necessary to have familiarity with Docker, docker-compose and
 
 ## Simple customization
 
-There are some environment variables for a simple customization. Find them in the `docker-compose.yml`. The images are ready to work out of the box, although is strongly recommended to change some default values.
+There are some environment variables for a simple customization. Find them in the `docker-compose.yml` and `docker-compose-inits.yml`. The images are ready to work out of the box, although is strongly recommended to change some default values.
 
+**Important** Don't forget to review environment variables in `docker-compose-inits.yml` as some of them are in both files.
 
 ### taiga-db
 
