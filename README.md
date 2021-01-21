@@ -96,7 +96,7 @@ Get these in your profile https://{YOUR-GITLAB}/profile/applications or in your 
 
 #### Importers
 
-It's possible to configure different platforms to import projects from them. Make sure that `ENABLE_IMPORTER_XXXX` envvar is configured in both taiga-back (x-environment) and taiga-front. In taiga-back environment variables, it's also necessary to configure different settings depending on the importer.
+It's possible to configure different platforms to import projects from them. Make sure that `ENABLE_XXXX_IMPORTER` envvar is configured in both taiga-back (x-environment) and taiga-front. In taiga-back environment variables, it's also necessary to configure different settings depending on the importer.
 
 ### taiga-async-rabbitmq
 
@@ -135,7 +135,7 @@ Get these in your profile https://{YOUR-GITLAB}/profile/applications or in your 
 
 #### Importers
 
-It's possible to configure different platforms to import projects from them. Make sure that `ENABLE_IMPORTER_XXXX` envvar is configured in both taiga-back (x-environment) and taiga-front.
+It's possible to configure different platforms to import projects from them. Make sure that `ENABLE_XXXX_IMPORTER` envvar is configured in both taiga-back (x-environment) and taiga-front.
 
 ### taiga-protected
 
