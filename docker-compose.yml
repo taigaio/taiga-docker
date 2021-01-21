@@ -40,9 +40,6 @@ x-environment:
   GITLAB_API_CLIENT_SECRET: "gitlab-api-client-secret"
   GITLAB_URL: "gitlab-url"
   # IMPORTERS
-  ENABLE_ASANA_IMPORTER: "False"
-  ASANA_IMPORTER_APP_ID: "app-id-from-asana"
-  ASANA_IMPORTER_APP_SECRET: "app-secret-from-asana"
   ENABLE_GITHUB_IMPORTER: "False"
   GITHUB_IMPORTER_CLIENT_ID: "client-id-from-github"
   GITHUB_IMPORTER_CLIENT_SECRET: "client-secret-from-github"
@@ -123,7 +120,6 @@ services:
       GITLAB_CLIENT_ID: "gitlab-client-id"
       GITLAB_URL: "gitlab-url"
       # IMPORTERS
-      ENABLE_ASANA_IMPORTER: "false"
       ENABLE_GITHUB_IMPORTER: "false"
       ENABLE_JIRA_IMPORTER: "false"
       ENABLE_TRELLO_IMPORTER: "false"
