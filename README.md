@@ -48,6 +48,11 @@ Besides, this should have the same value of `SECRET_KEY` in `taiga-protected`.
 
 Should have the url where this is served: https[://]taiga.mycompany.com
 
+#### Session Settings
+
+You can add `SESSION_COOKIE_SECURE` and `CSRF_COOKIE_SECURE` to x-environment and change its value. By default is "True", so some browsers only accept https connections.
+More info about these environment variables [here](https://docs.djangoproject.com/en/3.1/ref/settings/#csrf-cookie-secure).
+
 #### Registration Settings
 
 ##### `PUBLIC_REGISTER_ENABLED`
