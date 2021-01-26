@@ -1,4 +1,25 @@
-# Deploy Taiga with Docker
+# Taiga Docker
+
+## Documentation
+
+Currently, we have authored three main documentation hubs:
+
+- **[API](https://taigaio.github.io/taiga-doc/dist/api.html)**: Our API documentation and reference for developing from Taiga API.
+- **[Documentation](https://taigaio.github.io/taiga-doc/dist/)**: If you need to install Taiga on your own server, this is the place to find some guides.
+- **[Taiga Resources](https://resources.taiga.io)**: This page is intended to be the support reference page for the users.
+
+## Bug reports
+
+If you **find a bug** in Taiga you can always report it:
+
+- in [Taiga issues](https://tree.taiga.io/project/taiga/issues). **This is the preferred way**
+- in [Github issues](https://github.com/taigaio/taiga-docker/issues)
+- send us a mail to support@taiga.io if is a bug related to [tree.taiga.io](https://tree.taiga.io)
+- send us a mail to security@taiga.io if is a **security bug**.
+
+One of our fellow Taiga developers will search, find and hunt it as soon as possible.
+
+Please, before reporting a bug, write down how can we reproduce it, your operating system, your browser and version, and if it's possible, a screenshot. Sometimes it takes less time to fix a bug if the developer knows how to find it.
 
 ## Requirements
 
@@ -222,17 +243,3 @@ Default access for the application is **http://localhost:9000**.
 ```sh
 $ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage [COMMAND]
 ```
-
-## Bug reports, enhancements and support
-
-If you **need help to setup Taiga**, want to **talk about some cool enhancemnt** or you have **some questions**, please write us to our [mailing list](http://groups.google.com/d/forum/taigaio).
-
-If you **find a bug** in Taiga you can always report it:
-
-- in [Taiga issues](https://tree.taiga.io/project/taiga/issues).
-- send us a mail to support@taiga.io if is a bug related to [tree.taiga.io](https://tree.taiga.io).
-- send a mail to security@taiga.io if is a **security bug**.
-
-One of our fellow Taiga developers will search, find and hunt it as soon as possible.
-
-Please, before reporting a bug write down how can we reproduce it, your operating system, your browser and version, and if it's possible, a screenshot. Sometimes it takes less time to fix a bug if the developer knows how to find it and we will solve your problem as fast as possible.
