@@ -3,12 +3,13 @@ Currently, PRIMARY AUTHORS are:
 - Carlos Goce <carlos.goce@revelio.dev>
 - Carlos Letamendia <carlos.letamendia@revelio.dev>
 - David Barragán Merino <dbarragan@dbarragan.com>
-- Juanfran Alcántara <ramiro.sanchez@kaleidos.net>
+- Daniel Herrero <daniel.herrero@kaleidos.net>
+- Juanfran Alcántara <juanfran.alcantara@kaleidos.net>
 - Miguel González <miguel.gonzalez@revelio.dev>
 - Miryam González <miryam.gonzalez@kaleidos.net>
 - Natacha Menjibar <natacha.menjibar@kaleidos.net>
 - Pablo Ruiz <pablo.ruiz@kaleidos.net>
-- Ramiro Sánchez <juanfran.alcantara@kaleidos.net>
+- Ramiro Sánchez <ramiro.sanchez@kaleidos.net>
 - Teresa de la Torre <teresa.delatorre@kaleidos.net>
 - Xavi Julian <xavier.julian@kaleidos.net>
 - Yamila Moreno <yamila.moreno@kaleidos.net>
