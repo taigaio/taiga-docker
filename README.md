@@ -2,14 +2,11 @@
 
 ## Getting Started
 
-This section intends to explain how to get Taiga up and running in a
-simple two steps, using **docker** and **docker-compose**.
+This section intends to explain how to get Taiga up and running in a simple two steps, using **docker** and **docker-compose**.
 
-If you don't have docker installed, please follow installation
-instructions from docker.com: https://docs.docker.com/engine/install/
+If you don't have docker installed, please follow installation instructions from docker.com: https://docs.docker.com/engine/install/
 
-Additionally, it's necessary to have familiarity with Docker,
-docker-compose and Docker repositories.
+Additionally, it's necessary to have familiarity with Docker, docker-compose and Docker repositories.
 
 
 ### Start the application
@@ -18,8 +15,7 @@ docker-compose and Docker repositories.
 $ ./launch-all.sh
 ```
 
-After some instants, when the application is stated you can proceed to create the superuser
-with the following script:
+After some instants, when the application is started you can proceed to create the superuser with the following script:
 
 ```sh
 $ ./taiga-manage.sh createsuperuser
