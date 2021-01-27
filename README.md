@@ -34,18 +34,15 @@ $ ./taiga-manage.sh [COMMAND]
 
 Default access for the application is **http://localhost:9000**.
 
+![Taiga screenshot](imgs/taiga.png)
 
-As **EXTRA**: the default `launch-all.sh` script comes with
-[penpot](https://penpot.app), the open-source solution for design and
-prototyping. The default access for the penpot application is
-**http://locahost:9001**
+As **EXTRA**: the default `launch-all.sh` script comes with [penpot](https://penpot.app), the open-source solution for design and prototyping. The default access for the penpot application is **http://locahost:9001**
 
-If you give it a try and want configure it you can found all the
-neccessary documentation on [penpot github](https://github.com/penpot/penpot/tree/develop/docs)
+It's developed by the same team behind Taiga. If you want to give it a try, you can go to [penpot's github](https://github.com/penpot/penpot/tree/develop/docs) to review its own configuration variables.
 
-And finally if you just want to launch Taiga standalone, you can use
-the `launch-taiga.sh` script instead of the `launch-all.sh`.
+![Penpot screenshot](imgs/penpot.jpg)
 
+And finally if you just want to launch Taiga standalone, you can use the `launch-taiga.sh` script instead of the `launch-all.sh`.
 
 ## Bug reports
 
@@ -246,31 +243,19 @@ This vars will be used to connect to rabbitmq.
 
 ## Storage
 
-We have 3 named volumes configured: `taiga-static-data` for statics,
-`taiga-media-data` for medias and `taiga-db-data` for the database.
+We have 3 named volumes configured: `taiga-static-data` for statics, `taiga-media-data` for medias and `taiga-db-data` for the database.
 
 
-## Complex customization (via configuration files)
+## Advanced customization (via configuration files)
 
-For a complex customization, you can use configuration files, mapped
-to specific directories inside the containers.
+For a advanced customization, you can use configuration files, mapped to specific directories inside the containers.
 
 ### taiga-back
 
-Map a Python configuration file to
-`/taiga-back/settings/config.py`. You can use (this
-file)[https://github.com/taigaio/taiga-back/blob/taiga-6/docker/config.py]
-as an example.
+Map a Python configuration file to `/taiga-back/settings/config.py`. You can use (this file)[https://github.com/taigaio/taiga-back/blob/taiga-6/docker/config.py] as an example.
 
-**Important**: if you use your own configuration file, don't forget to
-add contribs to `INSTALLED_APPS` (check the example `config.py`).
+**Important**: if you use your own configuration file, don't forget to add contribs to `INSTALLED_APPS` (check the example `config.py`).
 
 ### taiga-front
 
-Map a `conf.json`configuration file to
-`/usr/share/nginx/html/conf.json`. You can use (this
-file)[https://github.com/taigaio/taiga-front/blob/taiga-6/docker/conf.json.template]
-as an example.
-
-
-
+Map a `conf.json`configuration file to `/usr/share/nginx/html/conf.json`. You can use (this file)[https://github.com/taigaio/taiga-front/blob/taiga-6/docker/conf.json.template] as an example.
