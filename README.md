@@ -30,7 +30,7 @@ $ ./taiga-manage.sh [COMMAND]
 
 Default access for the application is **http://localhost:9000**.
 
-![Taiga screenshot](imgs/taiga.png)
+![Taiga screenshot](imgs/taiga.jpg)
 
 As **EXTRA**: the default `launch-all.sh` script comes with [penpot](https://penpot.app), the open-source solution for design and prototyping. The default access for the penpot application is **http://locahost:9001**
 
