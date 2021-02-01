@@ -8,6 +8,7 @@ If you don't have docker installed, please follow installation instructions from
 
 Additionally, it's necessary to have familiarity with Docker, docker-compose and Docker repositories.
 
+**Note** branch `stable` should be used to deploy Taiga in production and `master` branch for development purposes.
 
 ### Start the application
 
