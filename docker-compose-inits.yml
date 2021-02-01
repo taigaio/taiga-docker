@@ -21,7 +21,7 @@ x-volumes:
 
 services:
   taiga-manage:
-    image: taigaio/taiga-back:6
+    image: taigaio/taiga-back:latest
     environment: *default-back-environment
     depends_on:
       - taiga-db
