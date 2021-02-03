@@ -70,8 +70,6 @@ services:
       - taiga-db-data:/var/lib/postgresql/data
     networks:
       - taiga
-    ports:
-      - "5432:5432"
 
   taiga-back:
     image: taigaio/taiga-back:latest
