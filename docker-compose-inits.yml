@@ -17,7 +17,7 @@ x-volumes:
   &default-back-volumes
   - taiga-static-data:/taiga-back/static
   - taiga-media-data:/taiga-back/media
-  # - ./config.py:/taiga-back/settings/config.py:ro
+  # - ./config.py:/taiga-back/settings/config.py
 
 services:
   taiga-manage:

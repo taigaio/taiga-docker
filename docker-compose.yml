@@ -56,7 +56,7 @@ x-volumes:
   &default-back-volumes
   - taiga-static-data:/taiga-back/static
   - taiga-media-data:/taiga-back/media
-  # - ./config.py:/taiga-back/settings/config.py:ro
+  # - ./config.py:/taiga-back/settings/config.py
 
 
 services:
@@ -124,7 +124,7 @@ services:
     networks:
       - taiga
     # volumes:
-    #   - ./conf.json:/usr/share/nginx/html/conf.json:ro
+    #   - ./conf.json:/usr/share/nginx/html/conf.json
 
   taiga-events:
     image: taigaio/taiga-events:latest
