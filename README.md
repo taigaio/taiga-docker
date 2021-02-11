@@ -139,6 +139,12 @@ More info about these environment variables [here](https://docs.djangoproject.co
 If you want to allow a public register, configure this variable to "True". By default is "False".
 Should be the same as this var in `taiga-front`.
 
+#### Slack Settings
+
+##### `ENABLE_SLACK`
+
+Enable Slack integration in your Taiga instance. By default is "True". Should have the same value as this variable in taiga-front service.
+
 #### Telemetry Settings
 
 Telemetry anonymous data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios.
@@ -167,17 +173,21 @@ Are used to leave messages in the rabbitmq services. Those variables should be t
 
 #### Github settings
 
-##### `GITHUB_API_CLIENT_ID`, `GITHUB_API_CLIENT_SECRET`
+##### `ENABLE_GITHUB_AUTH`, `GITHUB_API_CLIENT_ID`, `GITHUB_API_CLIENT_SECRET`
 
 Used for login with Github.
 Get these in your profile https://github.com/settings/apps or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
 
+**Note** `ENABLE_GITHUB_AUTH` should have the same value in taiga-back and taiga-front services
+
 #### Gitlab settings
 
-##### `GITLAB_API_CLIENT_ID`, `GITLAB_API_CLIENT_SECRET`, `GITLAB_URL`
+##### `ENABLE_GITLAB_AUTH`, `GITLAB_API_CLIENT_ID`, `GITLAB_API_CLIENT_SECRET`, `GITLAB_URL`
 
 Used for login with GitLab.
 Get these in your profile https://{YOUR-GITLAB}/profile/applications or in your organization profile https://{YOUR-GITLAB}/admin/applications
+
+**Note** `ENABLE_GITLAB_AUTH` should have the same value in taiga-back and taiga-front services
 
 #### Importers
 
@@ -208,15 +218,23 @@ To connect to the events. This should have the same value as `TAIGA_SITES_DOMAIN
 If you want to allow a public register, configure this variable to "true". By default is "false".
 Should be the same as this var in `taiga-back`.
 
-##### `GITHUB_CLIENT_ID`
+##### `ENABLE_GITHUB_AUTH`, `GITHUB_CLIENT_ID`
 
 Used for login with Github.
 Get these in your profile https://github.com/settings/apps or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
 
-##### `GITLAB_CLIENT_ID`, `GITLAB_URL`
+**Note** `ENABLE_GITHUB_AUTH` should have the same value in taiga-back and taiga-front services
+
+##### `ENABLE_GITLAB_AUTH`, `GITLAB_CLIENT_ID`, `GITLAB_URL`
 
 Used for login with GitLab.
 Get these in your profile https://{YOUR-GITLAB}/profile/applications or in your organization profile https://{YOUR-GITLAB}/admin/applications
+
+**Note** `ENABLE_GITLAB_AUTH` should have the same value in taiga-back and taiga-front services
+
+##### `ENABLE_SLACK`
+
+Enable Slack integration in your Taiga instance. By default is "true". Should have the same value as this variable in taiga-back service.
 
 #### Importers
 
