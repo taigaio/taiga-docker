@@ -284,10 +284,10 @@ For a advanced customization, you can use configuration files, mapped to specifi
 
 ### taiga-back
 
-Map a Python configuration file to `/taiga-back/settings/config.py`. You can use (this file)[https://raw.githubusercontent.com/taigaio/taiga-back/master/docker/config.py] as an example.
+Map a Python configuration file to `/taiga-back/settings/config.py`. You can use [this file](https://raw.githubusercontent.com/taigaio/taiga-back/master/docker/config.py) as an example.
 
 **Important**: if you use your own configuration file, don't forget to add contribs to `INSTALLED_APPS` (check the example `config.py`).
 
 ### taiga-front
 
-Map a `conf.json`configuration file to `/usr/share/nginx/html/conf.json`. You can use (this file)[https://raw.githubusercontent.com/taigaio/taiga-front/master/docker/conf.json.template] as an example.
+Map a `conf.json`configuration file to `/usr/share/nginx/html/conf.json`. You can use [this file](https://raw.githubusercontent.com/taigaio/taiga-front/master/docker/conf.json.template) as an example.
