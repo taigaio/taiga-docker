@@ -2,9 +2,6 @@ version: "3.5"
 
 x-environment:
   &default-back-environment
-  ######################
-  # CONFIGURATION
-  ######################
   # Database settings
   POSTGRES_DB: taiga
   POSTGRES_USER: taiga
@@ -29,38 +26,6 @@ x-environment:
   RABBITMQ_PASS: taiga
   # Telemetry settings
   ENABLE_TELEMETRY: "True"
-  ######################
-  # CUSTOMISATION
-  ######################
-  # Registration
-  PUBLIC_REGISTER_ENABLED: "False"
-  # Github settings
-  # Get these in your profile https://github.com/settings/apps
-  # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
-  ENABLE_GITHUB_AUTH: "False"
-  GITHUB_API_CLIENT_ID: "github-api-client-id"
-  GITHUB_API_CLIENT_SECRET: "github-api-client-secret"
-  # Gitlab settings
-  # Get these in your profile https://{YOUR-GITLAB}/profile/applications
-  # or in your organization profile https://{YOUR-GITLAB}/admin/applications
-  ENABLE_GITLAB_AUTH: "False"
-  GITLAB_API_CLIENT_ID: "gitlab-api-client-id"
-  GITLAB_API_CLIENT_SECRET: "gitlab-api-client-secret"
-  GITLAB_URL: "gitlab-url"
-  # Slack
-  ENABLE_SLACK: "False"
-  # Importers
-  ENABLE_GITHUB_IMPORTER: "False"
-  GITHUB_IMPORTER_CLIENT_ID: "client-id-from-github"
-  GITHUB_IMPORTER_CLIENT_SECRET: "client-secret-from-github"
-  ENABLE_JIRA_IMPORTER: "False"
-  JIRA_IMPORTER_CONSUMER_KEY: "consumer-key-from-jira"
-  JIRA_IMPORTER_CERT: "cert-from-jira"
-  JIRA_IMPORTER_PUB_CERT: "pub-cert-from-jira"
-  ENABLE_TRELLO_IMPORTER: "False"
-  TRELLO_IMPORTER_API_KEY: "api-key-from-trello"
-  TRELLO_IMPORTER_SECRET_KEY: "secret-key-from-trello"
-
 
 x-volumes:
   &default-back-volumes
@@ -117,32 +82,8 @@ services:
   taiga-front:
     image: taigaio/taiga-front:latest
     environment:
-      ######################
-      # CONFIGURATION
-      ######################
       TAIGA_URL: "http://localhost:9000"
       TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
-      ######################
-      # CUSTOMISATION
-      ######################
-      PUBLIC_REGISTER_ENABLED: "false"
-      # Github settings
-      # Get these in your profile https://github.com/settings/apps
-      # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
-      ENABLE_GITHUB_AUTH: "false"
-      GITHUB_CLIENT_ID: "github-client-id"
-      # Gitlab settings
-      # Get these in your profile https://{YOUR-GITLAB}/profile/applications
-      # or in your organization profile https://{YOUR-GITLAB}/admin/applications
-      ENABLE_GITLAB_AUTH: "false"
-      GITLAB_CLIENT_ID: "gitlab-client-id"
-      GITLAB_URL: "gitlab-url"
-      # Slack
-      ENABLE_SLACK: "false"
-      # Importers
-      ENABLE_GITHUB_IMPORTER: "false"
-      ENABLE_JIRA_IMPORTER: "false"
-      ENABLE_TRELLO_IMPORTER: "false"
     networks:
       - taiga
     # volumes:
