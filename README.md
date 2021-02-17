@@ -144,14 +144,15 @@ TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
 
 ### Session Settings
 
-You can add `SESSION_COOKIE_SECURE` and `CSRF_COOKIE_SECURE` to x-environment and change its value. By default is "True", so some browsers only accept https connections.
-More info about these environment variables [here](https://docs.djangoproject.com/en/3.1/ref/settings/#csrf-cookie-secure).
+Taiga doesn't use session cookies in its API as it stateless. However, the Django Admin (`/admin/`) uses session cookie for authentication. By default, Taiga is configured to work behind HTTPS. If you're using HTTP (despite de strong recommendations against it), you'll need to configure the following environment variables so you can access the Admin:
 
 **Service: taiga-back**
 ```
 SESSION_COOKIE_SECURE: "False"
 CSRF_COOKIE_SECURE: "False"
 ```
+
+More info about those variables can be found [here](https://docs.djangoproject.com/en/3.1/ref/settings/#csrf-cookie-secure).
 
 ### Email Settings
 
