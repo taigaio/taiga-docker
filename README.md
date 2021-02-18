@@ -193,6 +193,13 @@ RABBITMQ_USER: taiga
 RABBITMQ_PASS: taiga
 ```
 
+ Two other variables `EVENTS_PUSH_BACKEND_URL` and `CELERY_BROKER_URL` can also be used to set the events push backend URL and celery broker URL.
+
+```
+EVENTS_PUSH_BACKEND_URL: "amqp://taiga:taiga@taiga-events-rabbitmq:5672/taiga"
+CELERY_BROKER_URL: "amqp://taiga:taiga@taiga-async-rabbitmq:5672/taiga"
+```
+
 **Service: taiga-events**
 ```
 RABBITMQ_USER: taiga
