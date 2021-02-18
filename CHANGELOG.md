@@ -3,7 +3,7 @@
 
 ## 6.0.3 (unreleased)
 
-- ...
+- Improve docker configuration with `EVENTS_PUSH_BACKEND_URL` and `CELERY_BROKER_URL` variables. Thanks to @ginuerzh.
 
 
 ## 6.0.2 (2021-02-15)
