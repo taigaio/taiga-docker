@@ -3,7 +3,7 @@
 
 ## 6.0.4 (unreleased)
 
-- ...
+- Improve docker configuration with `POSTGRES_PORT`.
 
 ## 6.0.3 (2021-02-22)
 

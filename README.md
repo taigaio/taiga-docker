@@ -112,6 +112,8 @@ POSTGRES_USER: taiga
 POSTGRES_PASSWORD: taiga
 ```
 
+Additionally, you can also configure `POSTGRES_PORT` in `taiga-back`. Defaults to '5432'.
+
 ### Taiga Settings
 
 **Service: taiga-back**
