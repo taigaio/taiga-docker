@@ -1,8 +1,12 @@
 # Changelog
 
+## 6.0.5 (unreleased)
 
-## 6.0.4 (unreleased)
+- ...
 
+## 6.0.4 (2021-04-06)
+
+- Add named volumes for rabbit services
 - Improve docker configuration with `POSTGRES_PORT`.
 
 ## 6.0.3 (2021-02-22)
