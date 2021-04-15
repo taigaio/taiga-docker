@@ -78,9 +78,9 @@ Help us keep the Taiga Community open and inclusive. Please read and follow our 
 
 ## License
 
-Every code patch accepted in Taiga codebase is licensed under [MIT-0](LICENSE). You must be careful to not include any code that can not be licensed under this license.
+Every code patch accepted in Taiga codebase is licensed under [MPL 2.0](LICENSE). You must be careful to not include any code that can not be licensed under this license.
 
-Please read carefully [our license](https://github.com/taigaio/taiga-docker/blob/master/LICENSE) and ask us if you have any questions as well as the [Contribution policy](https://github.com/taigaio/taiga-docker/blob/master/CONTRIBUTING.md).
+Please read carefully [our license](LICENSE) and ask us if you have any questions as well as the [Contribution policy](https://github.com/taigaio/taiga-docker/blob/master/CONTRIBUTING.md).
 
 ## Configuration and Customisation with Environment Variables
 
