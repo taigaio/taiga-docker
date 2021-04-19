@@ -29,7 +29,7 @@ back instance:
 $ ./taiga-manage.sh [COMMAND]
 ```
 
-Default access for the application is **http://localhost:9000**.
+If you're testing it in your own machine, you can access the application in **http://localhost:9000**. If you're deploying in a server, you'll need to configure hosts and nginx as described later.
 
 ![Taiga screenshot](imgs/taiga.jpg)
 
