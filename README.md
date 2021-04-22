@@ -45,8 +45,8 @@ And finally if you just want to launch Taiga standalone, you can use the `launch
 
 Currently, we have authored three main documentation hubs:
 
-- **[API](https://taigaio.github.io/taiga-doc/dist/api.html)**: Our API documentation and reference for developing from Taiga API.
-- **[Documentation](https://taigaio.github.io/taiga-doc/dist/)**: If you need to install Taiga on your own server, this is the place to find some guides.
+- **[API](https://docs.taiga.io/api.html)**: Our API documentation and reference for developing from Taiga API.
+- **[Documentation](https://docs.taiga.io/)**: If you need to install Taiga on your own server, this is the place to find some guides.
 - **[Taiga Resources](https://resources.taiga.io)**: This page is intended to be the support reference page for the users.
 
 ## Bug reports
@@ -74,7 +74,7 @@ There are many different ways to contribute to Taiga's platform, from patches, t
 
 ## Code of Conduct
 
-Help us keep the Taiga Community open and inclusive. Please read and follow our [Code of Conduct](https://github.com/taigaio/code-of-conduct/blob/master/CODE_OF_CONDUCT.md).
+Help us keep the Taiga Community open and inclusive. Please read and follow our [Code of Conduct](https://github.com/kaleidos-ventures/code-of-conduct/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
