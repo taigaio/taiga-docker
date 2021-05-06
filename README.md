@@ -8,7 +8,7 @@ If you don't have docker installed, please follow installation instructions from
 
 Additionally, it's necessary to have familiarity with Docker, docker-compose and Docker repositories.
 
-**Note** branch `stable` should be used to deploy Taiga in production and `master` branch for development purposes.
+**Note** branch `stable` should be used to deploy Taiga in production and `main` branch for development purposes.
 
 ### Start the application
 
@@ -365,10 +365,10 @@ For a advanced customization, you can use configuration files, mapped to specifi
 
 ### taiga-back
 
-Map a Python configuration file to `/taiga-back/settings/config.py`. You can use [this file](https://raw.githubusercontent.com/taigaio/taiga-back/master/docker/config.py) as an example.
+Map a Python configuration file to `/taiga-back/settings/config.py`. You can use [this file](https://raw.githubusercontent.com/kaleidos-ventures/taiga-back/main/docker/config.py) as an example.
 
 **Important**: if you use your own configuration file, don't forget to add contribs to `INSTALLED_APPS` (check the example `config.py`).
 
 ### taiga-front
 
-Map a `conf.json`configuration file to `/usr/share/nginx/html/conf.json`. You can use [this file](https://raw.githubusercontent.com/taigaio/taiga-front/master/docker/conf.json.template) as an example.
+Map a `conf.json`configuration file to `/usr/share/nginx/html/conf.json`. You can use [this file](https://raw.githubusercontent.com/kaleidos-ventures/taiga-front/main/docker/conf.json.template) as an example.
