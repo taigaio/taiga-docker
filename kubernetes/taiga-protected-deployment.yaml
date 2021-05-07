@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: taiga-protected
+  name: taiga-protected
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taiga-protected
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        app: taiga-protected
+      creationTimestamp: null
+      labels:
+        app: taiga-protected
+    spec:
+      containers:
+      - env:
+        - name: MAX_AGE
+          value: "360"
+        - name: SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              key: SECRET_KEY
+              name: variables-env 
+        image: taigaio/taiga-protected:latest
+        imagePullPolicy: ""
+        name: taiga-protected
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: taiga-protected
+  name: taiga-protected
+spec:
+  ports:
+  - name: "8003"
+    port: 8003
+    protocol: TCP
+    targetPort: 8003
+  selector:
+    app: taiga-protected

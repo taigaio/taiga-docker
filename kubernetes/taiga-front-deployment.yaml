@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: taiga-front  
+  name: taiga-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taiga-front  
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: taiga-front  
+    spec:
+      containers:
+      - env:
+        - name: TAIGA_URL
+          valueFrom:
+            configMapKeyRef:
+              key: TAIGA_URL
+              name: variables-env
+        - name: TAIGA_WEBSOCKETS_URL
+          valueFrom:
+            configMapKeyRef:
+              key: TAIGA_WEBSOCKETS_URL
+              name: variables-env
+        image: taigaio/taiga-front:latest
+        imagePullPolicy: ""
+        name: taiga-front
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: taiga-front
+  name: taiga-front
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: taiga-front

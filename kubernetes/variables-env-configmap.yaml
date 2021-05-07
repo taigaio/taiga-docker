@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: variables-env  
+data:
+  #EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
+  #DEFAULT_FROM_EMAIL: "no-reply@example.com"
+  #EMAIL_HOST: "smtp.host.example.com"
+  #EMAIL_PORT: 587
+  #EMAIL_HOST_USER: "user"
+  #EMAIL_HOST_PASSWORD: "password"
+  #EMAIL_USE_TLS: "True"
+  #EMAIL_USE_SSL: "True"
+  ENABLE_TELEMETRY: "True"
+  POSTGRES_DB: "taiga"
+  POSTGRES_HOST: "taiga-db"
+  POSTGRES_PASSWORD: "taiga"
+  POSTGRES_USER: "taiga"
+  RABBITMQ_DEFAULT_PASS: "taiga"
+  RABBITMQ_DEFAULT_USER: "taiga"
+  RABBITMQ_DEFAULT_VHOST: "taiga"
+  RABBITMQ_ERLANG_COOKIE: "secret-erlang-cookie"
+  RABBITMQ_PASS: "taiga"
+  RABBITMQ_USER: "taiga"
+  TAIGA_SECRET_KEY: "taiga-back-secret-key"
+  SECRET_KEY: "taiga-back-secret-key"
+  # REPLACE BY YOUR OWN DOMAIN  
+  TAIGA_SITES_DOMAIN: "taiga6-dev.domain.local"
+  TAIGA_SITES_SCHEME: "https"
+  TAIGA_URL: "https://taiga6-dev.domain.local"
+  TAIGA_WEBSOCKETS_URL: "wss://taiga6-dev.domain.local"

@@ -1,0 +1,44 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: taiga-ingress
+  namespace: taiga
+spec:
+  virtualhost:
+    # Replace by your own domain
+    fqdn: taiga6-dev.domain.local
+  # Optional   
+    tls:
+      secretName: certificate-secret
+  routes:
+    - conditions:
+      - prefix: /static
+      services:
+        - name: taiga-back
+          port: 8000
+    - conditions:
+      - prefix: /admin
+      services:
+        - name: taiga-back
+          port: 8000
+    - conditions:
+      - prefix: /api
+      services:
+        - name: taiga-back
+          port: 8000
+    - conditions:
+      - prefix: /media
+      services:
+        - name: taiga-protected
+          port: 8003
+    - conditions:
+      - prefix: /
+      enableWebsockets: true  
+      services:
+        - name: taiga-front
+          port: 80
+    - conditions:
+      - prefix: /events
+      services:
+        - name: taiga-events
+          port: 8888

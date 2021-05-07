@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: taiga-events-rabbitmq  
+  name: taiga-events-rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taiga-events-rabbitmq
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: taiga-events-rabbitmq  
+    spec:
+      containers:
+      - env:
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_DEFAULT_PASS
+              name: variables-env
+        - name: RABBITMQ_DEFAULT_USER
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_DEFAULT_USER
+              name: variables-env
+        - name: RABBITMQ_DEFAULT_VHOST
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_DEFAULT_VHOST
+              name: variables-env
+        - name: RABBITMQ_ERLANG_COOKIE
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_ERLANG_COOKIE
+              name: variables-env
+        image: rabbitmq:3-management-alpine
+        imagePullPolicy: ""
+        name: taiga-events-rabbitmq
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/rabbitmq
+          name: taiga-events-rabbitmq-data
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: taiga-events-rabbitmq-data
+        persistentVolumeClaim:
+          claimName: taiga-events-rabbitmq-data
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: taiga-events-rabbitmq
+  name: taiga-events-rabbitmq
+spec:
+  ports:
+  - name: "5672"
+    port: 5672
+    protocol: TCP
+    targetPort: 5672
+  selector:
+    app: taiga-events-rabbitmq

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: taiga-events
+  name: taiga-events
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taiga-events
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        app: taiga-events
+      creationTimestamp: null
+      labels:
+        app: taiga-events
+    spec:
+      containers:
+      - env:
+        - name: RABBITMQ_PASS
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_PASS
+              name: variables-env
+        - name: RABBITMQ_USER
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_USER
+              name: variables-env
+        - name: TAIGA_SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              key: TAIGA_SECRET_KEY
+              name: variables-env
+        image: taigaio/taiga-events:latest
+        imagePullPolicy: ""
+        name: taiga-events
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: taiga-events
+  name: taiga-events
+spec:
+  ports:
+  - name: "8888"
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: taiga-events

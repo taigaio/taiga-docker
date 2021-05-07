@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: taiga-back  
+  name: taiga-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taiga-back  
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        app: taiga-back  
+      labels:
+        app: taiga-back  
+    spec:
+      containers:
+      - env:
+        - name: ENABLE_TELEMETRY
+          valueFrom:
+            configMapKeyRef:
+              key: ENABLE_TELEMETRY
+              name: variables-env  
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_DB
+              name: variables-env  
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_HOST
+              name: variables-env
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PASSWORD
+              name: variables-env
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_USER
+              name: variables-env
+        - name: RABBITMQ_PASS
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_PASS
+              name: variables-env
+        - name: RABBITMQ_USER
+          valueFrom:
+            configMapKeyRef:
+              key: RABBITMQ_USER
+              name: variables-env
+        - name: TAIGA_SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              key: TAIGA_SECRET_KEY
+              name: variables-env
+        - name: TAIGA_SITES_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              key: TAIGA_SITES_DOMAIN
+              name: variables-env
+        - name: TAIGA_SITES_SCHEME
+          valueFrom:
+            configMapKeyRef:
+              key: TAIGA_SITES_SCHEME
+              name: variables-env
+        image: taigaio/taiga-back:latest
+        imagePullPolicy: ""
+        name: taiga-back
+        resources: {}
+        volumeMounts:
+        - mountPath: /taiga-back/static
+          name: taiga-static-data
+        - mountPath: /taiga-back/media
+          name: taiga-media-data
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: taiga-static-data
+        persistentVolumeClaim:
+          claimName: taiga-static-data
+      - name: taiga-media-data
+        persistentVolumeClaim:
+          claimName: taiga-media-data
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: taiga-back
+  name: taiga-back
+spec:
+  ports:
+  - name: "8000"
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: taiga-back
