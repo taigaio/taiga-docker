@@ -39,6 +39,7 @@ spec:
           port: 80
     - conditions:
       - prefix: /events
+      enableWebsockets: true  
       services:
         - name: taiga-events
           port: 8888
