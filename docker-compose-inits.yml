@@ -21,6 +21,7 @@ x-volumes:
   # Decomment the next two lines to use bind mounts
   # - ./taiga-bind-mounts/taiga-back/static:/taiga-back/static
   # - ./taiga-bind-mounts/taiga-back/media:/taiga-back/media
+  
   # - ./config.py:/taiga-back/settings/config.py
 
 services:
