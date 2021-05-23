@@ -1,2 +1,7 @@
 db-data
 static-data
+# Uncomment this block if you want to use docker bind mounts for easier backups
+# taiga-bind-mounts/taiga-back
+# taiga-bind-mounts/taiga-db
+# taiga-bind-mounts/taiga-async-rabbitmq
+# taiga-bind-mounts/taiga-events-rabbitmq
