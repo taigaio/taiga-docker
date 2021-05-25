@@ -9,6 +9,9 @@ daysUntilClose: 7
 # Label to use when marking an issue as stale
 staleLabel:
    - bug
+   - question
+   - feature_request
+   - needs_info
    - needs-info
    - incomplete
 # Comment to post when marking an issue as stale. Set to `false` to disable
