@@ -19,15 +19,9 @@ spec:
         app: taiga-gateway
     spec:
       containers:
-      - env:
-        - name: SECRET_KEY
-          valueFrom:
-            configMapKeyRef:
-              key: SECRET_KEY
-              name: variables-env 
+      - name: taiga-gateway
         image: nginx:1.19-alpine
         imagePullPolicy: ""
-        name: taiga-gateway
         resources: {}
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
