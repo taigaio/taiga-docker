@@ -117,12 +117,39 @@ Additionally, you can also configure `POSTGRES_PORT` in `taiga-back`. Defaults t
 ### Taiga Settings
 
 **Service: taiga-back**
+
+The default configuration assumes Taiga is being served in a **subdomain**:
 ```
-TAIGA_SECRET_KEY: taiga-back-secret-key
-TAIGA_SITES_SCHEME: http
-TAIGA_SITES_DOMAIN: localhost:9000
+TAIGA_SECRET_KEY: "taiga-back-secret-key"
+TAIGA_SITES_SCHEME: "https"
+TAIGA_SITES_DOMAIN: "taiga.mycompany.com"
+TAIGA_SUBPATH: "/"
 ```
 
+If Taiga is being served in a **subpath** instead of a subdomain, the configuration should be something like:
+```
+TAIGA_SECRET_KEY: "taiga-back-secret-key"
+TAIGA_SITES_SCHEME: "https"
+TAIGA_SITES_DOMAIN: "mycompany.com/taiga"
+TAIGA_SUBPATH: "/taiga" # Mind just one slash
+```
+
+**Service: taiga-front**
+
+The default configuration assumes Taiga is being served in a **subdomain**:
+```
+TAIGA_URL: "https://taiga.mycompany.com"
+TAIGA_WEBSOCKETS_URL: "wss://taiga.mycompany.com"
+TAIGA_SUBPATH: "/"
+```
+
+If Taiga is being served in a **subpath** instead of a subdomain, the configuration should be something like:
+```
+TAIGA_URL: "https://mycompany.com/taiga"
+TAIGA_WEBSOCKETS_URL: "wss://mycompany.com/taiga"
+TAIGA_SUBPATH: "/taiga/" # Mind both slashes
+
+```
 **Service: taiga-events**
 ```
 TAIGA_SECRET_KEY: taiga-back-secret-key
@@ -130,20 +157,12 @@ TAIGA_SECRET_KEY: taiga-back-secret-key
 
 **Service: taiga-protected**
 ```
-TAIGA_SECRET_KEY: taiga-back-secret-key
-```
-
-**Service: taiga-front**
-```
-TAIGA_URL: "http://localhost:9000"
-TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
+SECRET_KEY: "taiga-back-secret-key"
 ```
 
 `TAIGA_SECRET_KEY` is the secret key of Taiga. Should be the same as this var in `taiga-back`, `taiga-events` and `taiga-protected`.
 `TAIGA_URL` is where this Taiga instance should be served. It should be the same as `TAIGA_SITES_SCHEME`://`TAIGA_SITES_DOMAIN`.
-`TAIGA_WEBSOCKETS_URL` is used to connect to the events. This should have the same value as `TAIGA_SITES_DOMAIN`, ie: ws://taiga.mycompany.com.
-
-> IMPORTANT NOTICE: When you're configuring Taiga to run with HTTPS, you should configure `TAIGA_URL` with `https` and `TAIGA_WEBSOCKETS_URL` with `wss`.
+`TAIGA_WEBSOCKETS_URL` is used to connect to the events. This should have the same value as `TAIGA_SITES_DOMAIN`, ie: wss://taiga.mycompany.com.
 
 ### Session Settings
 
@@ -164,8 +183,8 @@ By default, email is configured with the *console* backend, which means that the
 **Service: taiga-back**
 ```
 EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
-DEFAULT_FROM_EMAIL: "no-reply@example.com"
-EMAIL_HOST: "smtp.host.example.com"
+DEFAULT_FROM_EMAIL: "no-reply@mycompany.com"
+EMAIL_HOST: "smtp.host.mycompany.com"
 EMAIL_PORT: 587
 EMAIL_HOST_USER: "user"
 EMAIL_HOST_PASSWORD: "password"
@@ -357,7 +376,6 @@ ENABLE_TRELLO_IMPORTER: "true"
 ## Storage
 
 We have 3 named volumes configured: `taiga-static-data` for statics, `taiga-media-data` for medias and `taiga-db-data` for the database.
-
 
 ## Advanced customization (via configuration files)
 
