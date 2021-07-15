@@ -4,6 +4,10 @@
 
 - ...
 
+## 6.2.2 (2021-07-15)
+
+- Compatible with Taiga 6.2.2
+
 ## 6.2.1 (2021-06-22)
 
 - Compatible with Taiga 6.2.1
