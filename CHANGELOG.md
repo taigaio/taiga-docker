@@ -2,7 +2,7 @@
 
 ## 6.3.0 (unreleased)
 
-- ...
+- Temporary fix specifying latest valid image of RabbitMQ (issue #tg-4700)
 
 ## 6.2.2 (2021-07-15)
 
