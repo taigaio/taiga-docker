@@ -1,6 +1,10 @@
 # Changelog
 
-## 6.3.0 (unreleased)
+## 6.3.1 (unreleased)
+
+- ...
+
+## 6.3.0 (2021-08-10)
 
 - Temporary fix specifying latest valid image of RabbitMQ (issue #tg-4700)
 
