@@ -5,6 +5,7 @@ title: '[FR] '
 labels: feature_request
 assignees: ''
 ---
+&gt; **READ THIS FIRST!**: We recently announced Taiga plans for the future and they greatly affect how we manage this repository and the current Taiga 6 release. Check it [here](https://blog.taiga.io/announcing_taiganext.html).chore: readme announce taiga-next
 <!--
   Please make sure to look through existing feature request (https://tree.taiga.io/project/taiga/issues?type=1199039,1198771) to see whether your idea is already being discussed
 -->
