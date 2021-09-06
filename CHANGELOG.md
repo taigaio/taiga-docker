@@ -1,6 +1,10 @@
 # Changelog
 
-## 6.3.1 (unreleased)
+## 6.5.0 (unreleased)
+
+- ...
+
+## 6.4.0 (2021-09-06)
 
 - Serve Taiga in subpath
 
