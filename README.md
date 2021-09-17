@@ -35,7 +35,7 @@ If you're testing it in your own machine, you can access the application in **ht
 
 ![Taiga screenshot](imgs/taiga.jpg)
 
-As **EXTRA**: the default `launch-all.sh` script comes with [penpot](https://penpot.app), the open-source solution for design and prototyping. The default access for the penpot application is **http://locahost:9001**
+As **EXTRA**: the default `launch-all.sh` script comes with [penpot](https://penpot.app), the open-source solution for design and prototyping. The default access for the penpot application is **http://localhost:9001**
 
 It's developed by the same team behind Taiga. If you want to give it a try, you can go to [penpot's github](https://github.com/penpot/penpot) or the [help center](https://help.penpot.app/technical-guide/configuration/) to review its own configuration variables.
 
