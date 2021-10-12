@@ -77,6 +77,7 @@ services:
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: taiga
       RABBITMQ_DEFAULT_VHOST: taiga
+    hostname: "taiga-async-rabbitmq"
     volumes:
       - taiga-async-rabbitmq-data:/var/lib/rabbitmq
     networks:
@@ -111,6 +112,7 @@ services:
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: taiga
       RABBITMQ_DEFAULT_VHOST: taiga
+    hostname: "taiga-events-rabbitmq"
     volumes:
       - taiga-events-rabbitmq-data:/var/lib/rabbitmq
     networks:
