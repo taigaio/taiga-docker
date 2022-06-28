@@ -6,14 +6,16 @@ daysUntilClose: 7
 # exemptLabels:
 #   - pinned
 #   - security
-# Label to use when marking an issue as stale
-staleLabel:
+# Only issues or pull requests with all of these labels are check if stale. Defaults to `[]` (disabled)
+onlyLabels:
    - bug
    - question
    - feature_request
    - needs_info
    - needs-info
    - incomplete
+# Label to use when marking an issue as stale
+staleLabel: stale
 # Comment to post when marking an issue as stale. Set to `false` to disable
 markComment: >
   This issue has been automatically marked as stale because it has not had
@@ -23,5 +25,3 @@ markComment: >
 closeComment: false
 
 only: issues
-
-staleLabel: stale
