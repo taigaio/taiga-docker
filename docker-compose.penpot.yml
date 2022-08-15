@@ -38,8 +38,10 @@ services:
       - penpot_assets_data:/opt/data
 
     depends_on:
-      - penpot-postgres
-      - penpot-redis
+      penpot-postgres:
+        condition: service_healthy
+      penpot-redis:
+        condition: service_started
 
     env_file:
       - docker-compose.penpot.env
@@ -72,6 +74,12 @@ services:
 
     networks:
       - penpot
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   penpot-redis:
     image: redis:6
