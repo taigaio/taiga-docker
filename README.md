@@ -49,7 +49,7 @@ Currently, we have authored three main documentation hubs:
 
 - **[API](https://docs.taiga.io/api.html)**: Our API documentation and reference for developing from Taiga API.
 - **[Documentation](https://docs.taiga.io/)**: If you need to install Taiga on your own server, this is the place to find some guides.
-- **[Taiga Resources](https://resources.taiga.io)**: This page is intended to be the support reference page for the users.
+- **[Taiga Community](https://community.taiga.io/)**: This page is intended to be the support reference page for the users.
 
 ## Bug reports
 
@@ -72,7 +72,7 @@ If you want to be up to date about announcements of releases, important changes 
 
 ## Contribute to Taiga
 
-There are many different ways to contribute to Taiga's platform, from patches, to documentation and UI enhancements, just find the one that best fits with your skills. Check out our detailed [contribution guide](https://resources.taiga.io/extend/how-can-i-contribute/)
+There are many different ways to contribute to Taiga's platform, from patches, to documentation and UI enhancements, just find the one that best fits with your skills. Check out our detailed [contribution guide](https://community.taiga.io/t/how-can-i-contribute/159#code-patches-enhacements-3).
 
 ## Code of Conduct
 
@@ -101,6 +101,7 @@ These vars will be used to create the database for Taiga and connect to it.
 **Important**: these vars should have the same values in `taiga-back` and `taiga-db`.
 
 **Service: taiga-db**
+
 ```
 POSTGRES_DB: taiga
 POSTGRES_USER: taiga
@@ -108,6 +109,7 @@ POSTGRES_PASSWORD: taiga
 ```
 
 **Service: taiga-back**
+
 ```
 POSTGRES_DB: taiga
 POSTGRES_USER: taiga
@@ -121,6 +123,7 @@ Additionally, you can also configure `POSTGRES_PORT` in `taiga-back`. Defaults t
 **Service: taiga-back**
 
 The default configuration assumes Taiga is being served in a **subdomain**:
+
 ```
 TAIGA_SECRET_KEY: "taiga-back-secret-key"
 TAIGA_SITES_SCHEME: "https"
@@ -129,6 +132,7 @@ TAIGA_SUBPATH: "/"
 ```
 
 If Taiga is being served in a **subpath** instead of a subdomain, the configuration should be something like:
+
 ```
 TAIGA_SECRET_KEY: "taiga-back-secret-key"
 TAIGA_SITES_SCHEME: "https"
@@ -139,6 +143,7 @@ TAIGA_SUBPATH: "/taiga" # Mind just one slash
 **Service: taiga-front**
 
 The default configuration assumes Taiga is being served in a **subdomain**:
+
 ```
 TAIGA_URL: "https://taiga.mycompany.com"
 TAIGA_WEBSOCKETS_URL: "wss://taiga.mycompany.com"
@@ -146,18 +151,22 @@ TAIGA_SUBPATH: "/"
 ```
 
 If Taiga is being served in a **subpath** instead of a subdomain, the configuration should be something like:
+
 ```
 TAIGA_URL: "https://mycompany.com/taiga"
 TAIGA_WEBSOCKETS_URL: "wss://mycompany.com/taiga"
 TAIGA_SUBPATH: "/taiga/" # Mind both slashes
 
 ```
+
 **Service: taiga-events**
+
 ```
 TAIGA_SECRET_KEY: taiga-back-secret-key
 ```
 
 **Service: taiga-protected**
+
 ```
 SECRET_KEY: "taiga-back-secret-key"
 ```
@@ -171,6 +180,7 @@ SECRET_KEY: "taiga-back-secret-key"
 Taiga doesn't use session cookies in its API as it stateless. However, the Django Admin (`/admin/`) uses session cookie for authentication. By default, Taiga is configured to work behind HTTPS. If you're using HTTP (despite de strong recommendations against it), you'll need to configure the following environment variables so you can access the Admin:
 
 **Service: taiga-back**
+
 ```
 SESSION_COOKIE_SECURE: "False"
 CSRF_COOKIE_SECURE: "False"
@@ -180,9 +190,10 @@ More info about those variables can be found [here](https://docs.djangoproject.c
 
 ### Email Settings
 
-By default, email is configured with the *console* backend, which means that the emails will be shown in the stdout. If you have an smtp service, uncomment the "Email settings" section in `docker-compose.yml` and configure those environment variables:
+By default, email is configured with the _console_ backend, which means that the emails will be shown in the stdout. If you have an smtp service, uncomment the "Email settings" section in `docker-compose.yml` and configure those environment variables:
 
 **Service: taiga-back**
+
 ```
 EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
 DEFAULT_FROM_EMAIL: "no-reply@mycompany.com"
@@ -201,6 +212,7 @@ Uncomment `EMAIL_BACKEND` variable, but do not modify unless you know what you'r
 Telemetry anonymous data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios.
 
 **Service: taiga-back**
+
 ```
 ENABLE_TELEMETRY: "True"
 ```
@@ -212,12 +224,13 @@ You can opt out by setting this variable to "False". By default is "True".
 These variables are used to leave messages in the rabbitmq services. These variables should be the same as in `taiga-back`, `taiga-async`, `taiga-events`, `taiga-async-rabbitmq` and `taiga-events-rabbitmq`.
 
 **Service: taiga-back**
+
 ```
 RABBITMQ_USER: taiga
 RABBITMQ_PASS: taiga
 ```
 
- Two other variables `EVENTS_PUSH_BACKEND_URL` and `CELERY_BROKER_URL` can also be used to set the events push backend URL and celery broker URL.
+Two other variables `EVENTS_PUSH_BACKEND_URL` and `CELERY_BROKER_URL` can also be used to set the events push backend URL and celery broker URL.
 
 ```
 EVENTS_PUSH_BACKEND_URL: "amqp://taiga:taiga@taiga-events-rabbitmq:5672/taiga"
@@ -225,12 +238,14 @@ CELERY_BROKER_URL: "amqp://taiga:taiga@taiga-async-rabbitmq:5672/taiga"
 ```
 
 **Service: taiga-events**
+
 ```
 RABBITMQ_USER: taiga
 RABBITMQ_PASS: taiga
 ```
 
 **Service: taiga-async-rabbitmq**
+
 ```
 RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
 RABBITMQ_DEFAULT_USER: taiga
@@ -239,6 +254,7 @@ RABBITMQ_DEFAULT_VHOST: taiga
 ```
 
 **Service: taiga-events-rabbitmq**
+
 ```
 RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
 RABBITMQ_DEFAULT_USER: taiga
@@ -249,6 +265,7 @@ RABBITMQ_DEFAULT_VHOST: taiga
 ### Taiga protected settings
 
 **Service: taiga-protected**
+
 ```
 MAX_AGE: 360
 ```
@@ -262,11 +279,13 @@ All these features are disabled by default. You should add the corresponding env
 ### Registration Settings
 
 **Service: taiga-back**
+
 ```
 PUBLIC_REGISTER_ENABLED: "True"
 ```
 
 **Service: taiga-front**
+
 ```
 PUBLIC_REGISTER_ENABLED: "true"
 ```
@@ -278,11 +297,13 @@ If you want to allow a public register, configure this variable to "True". By de
 ### Slack Settings
 
 **Service: taiga-back**
+
 ```
 ENABLE_SLACK: "True"
 ```
 
 **Service: taiga-front**
+
 ```
 ENABLE_SLACK: "true"
 ```
@@ -303,6 +324,7 @@ GITHUB_API_CLIENT_SECRET: "github-api-client-secret"
 ```
 
 **Service: taiga-front**
+
 ```
 ENABLE_GITHUB_AUTH: "true"
 GITHUB_API_CLIENT_ID: "github-api-client-id"
@@ -316,6 +338,7 @@ Get these in your profile https://{YOUR-GITLAB}/profile/applications or in your 
 **Note** `ENABLE_GITLAB_AUTH`, `GITLAB_CLIENT_ID` and `GITLAB_URL` should have the same value in `taiga-back` and `taiga-front` services.
 
 **Service: taiga-back**
+
 ```
 ENABLE_GITLAB_AUTH: "True"
 GITLAB_API_CLIENT_ID: "gitlab-api-client-id"
@@ -324,6 +347,7 @@ GITLAB_URL: "gitlab-url"
 ```
 
 **Service: taiga-front**
+
 ```
 ENABLE_GITLAB_AUTH: "true"
 GITLAB_CLIENT_ID: "gitlab-client-id"
@@ -335,6 +359,7 @@ GITLAB_URL: "gitlab-url"
 #### Github
 
 **Service: taiga-back**
+
 ```
 ENABLE_GITHUB_IMPORTER: "True"
 GITHUB_IMPORTER_CLIENT_ID: "client-id-from-github"
@@ -342,6 +367,7 @@ GITHUB_IMPORTER_CLIENT_SECRET: "client-secret-from-github"
 ```
 
 **Service: taiga-front**
+
 ```
 ENABLE_GITHUB_IMPORTER: "true"
 ```
@@ -349,6 +375,7 @@ ENABLE_GITHUB_IMPORTER: "true"
 #### Jira
 
 **Service: taiga-back**
+
 ```
 ENABLE_JIRA_IMPORTER: "True"
 JIRA_IMPORTER_CONSUMER_KEY: "consumer-key-from-jira"
@@ -357,6 +384,7 @@ JIRA_IMPORTER_PUB_CERT: "pub-cert-from-jira"
 ```
 
 **Service: taiga-front**
+
 ```
 ENABLE_JIRA_IMPORTER: "true"
 ```
@@ -364,6 +392,7 @@ ENABLE_JIRA_IMPORTER: "true"
 #### Trello
 
 **Service: taiga-back**
+
 ```
 ENABLE_TRELLO_IMPORTER: "True"
 TRELLO_IMPORTER_API_KEY: "api-key-from-trello"
@@ -371,6 +400,7 @@ TRELLO_IMPORTER_SECRET_KEY: "secret-key-from-trello"
 ```
 
 **Service: taiga-front**
+
 ```
 ENABLE_TRELLO_IMPORTER: "true"
 ```
