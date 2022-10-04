@@ -49,6 +49,9 @@ services:
 
   penpot-exporter:
     image: "penpotapp/exporter:latest"
+    env_file:
+      - docker-compose.penpot.env
+
     environment:
       # Don't touch it; this uses internal docker network to
       # communicate with the frontend.
