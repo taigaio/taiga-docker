@@ -102,7 +102,8 @@ services:
     networks:
       - taiga
     depends_on:
-      - taiga-events-rabbitmq
+      taiga-events-rabbitmq:
+        condition: service_healthy
 
   taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -111,6 +112,8 @@ services:
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: taiga
       RABBITMQ_DEFAULT_VHOST: taiga
+    healthcheck:
+      test: "rabbitmq-diagnostics is_running"
     volumes:
       - taiga-events-rabbitmq-data:/var/lib/rabbitmq
     networks:
