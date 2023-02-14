@@ -1,8 +1,8 @@
 # Changelog
 
-## 6.6.0 (unreleased)
+## 6.6.0 (Unreleased)
 
-- ...
+- New .env based configuration docker
 
 ## 6.5.0 (2022-01-24)
 
