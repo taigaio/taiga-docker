@@ -40,6 +40,12 @@ services:
       POSTGRES_DB: "taiga"
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 2s
+      timeout: 15s
+      retries: 5
+      start_period: 3s
     volumes:
       - taiga-db-data:/var/lib/postgresql/data
     networks:
@@ -52,9 +58,12 @@ services:
     networks:
       - taiga
     depends_on:
-      - taiga-db
-      - taiga-events-rabbitmq
-      - taiga-async-rabbitmq
+      taiga-db:
+        condition: service_healthy
+      taiga-events-rabbitmq:
+        condition: service_healthy
+      taiga-async-rabbitmq:
+        condition: service_healthy
 
   taiga-async:
     image: taigaio/taiga-back:latest
@@ -64,9 +73,12 @@ services:
     networks:
       - taiga
     depends_on:
-      - taiga-db
-      - taiga-back
-      - taiga-async-rabbitmq
+      taiga-db:
+        condition: service_healthy
+      taiga-events-rabbitmq:
+        condition: service_healthy
+      taiga-async-rabbitmq:
+        condition: service_healthy
 
   taiga-async-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -75,6 +87,12 @@ services:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
       RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 2s
+      timeout: 15s
+      retries: 5
+      start_period: 3s
     volumes:
       - taiga-async-rabbitmq-data:/var/lib/rabbitmq
     networks:
@@ -100,7 +118,8 @@ services:
     networks:
       - taiga
     depends_on:
-      - taiga-events-rabbitmq
+      taiga-events-rabbitmq:
+        condition: service_healthy
 
   taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -109,6 +128,12 @@ services:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
       RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 2s
+      timeout: 15s
+      retries: 5
+      start_period: 3s
     volumes:
       - taiga-events-rabbitmq-data:/var/lib/rabbitmq
     networks:
