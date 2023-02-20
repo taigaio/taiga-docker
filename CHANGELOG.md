@@ -3,6 +3,7 @@
 ## 6.6.0 (Unreleased)
 
 - New .env based configuration docker
+- Control services startup based on healthchecks
 
 ## 6.5.0 (2022-01-24)
 
