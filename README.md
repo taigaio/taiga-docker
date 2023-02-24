@@ -3,11 +3,10 @@
 | :exclamation: | We recently announced Taiga plans for the future and they greatly affect how we manage this repository and the current Taiga 6 release. Check it [here](https://blog.taiga.io/announcing_taiganext.html).    |
 |---------------|:----|
 
-| :information_source: | You can access the [older docker installation guide](https://docs.taiga.io/setup-production.old.html#setup-prod-with-docker-old) for documentation purposes, intended just for earlier versions of Taiga (prior to ver. 6.6.0)|
-|---------------|:----|
-
 | :information_source: | If you're already using taiga-docker, follow this [migration guide](https://docs.taiga.io/upgrades-docker-migrate.html) to use the new `.env` based deployment. |
 |---------------|:----|
+
+**Note:** You can access the [older docker installation guide](https://docs.taiga.io/setup-production.old.html#setup-prod-with-docker-old) for documentation purposes, intended just for earlier versions of Taiga (prior to ver. 6.6.0)
 
 
 ## Getting Started
