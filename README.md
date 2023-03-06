@@ -11,11 +11,11 @@
 
 ## Getting Started
 
-This section intends to explain how to get Taiga up and running in a simple two steps, using **docker** and **docker-compose**.
+This section intends to explain how to get Taiga up and running in a simple two steps, using **docker** and **docker compose**.
 
-If you don't have docker installed, please follow installation instructions from docker.com: https://docs.docker.com/engine/install/
+If you don't have docker installed, please follow installation instructions from [docker.com](https://docs.docker.com/engine/install/) (**version 19.03.0+**)
 
-Additionally, it's necessary to have familiarity with Docker, docker-compose and Docker repositories.
+Additionally, it's necessary to have familiarity with Docker, docker compose and Docker repositories.
 
 **Note** branch `stable` should be used to deploy Taiga in production and `main` branch for development purposes.
 
@@ -417,9 +417,9 @@ Map the file into `/taiga-front/dist/config.py`.
 ## Configure an admin user
 
 ```bash
-$ docker-compose up -d
+$ docker compose up -d
 
-$ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage createsuperuser
+$ docker compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taiga-manage createsuperuser
 ```
 
 ## Up and running
@@ -427,7 +427,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose-inits.yml run --rm taig
 Once everything has been installed, launch all the services and check the result:
 
 ```bash
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ## Configure the proxy
