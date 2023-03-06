@@ -1,12 +1,15 @@
 # Changelog
 
-## 6.6.0 (Unreleased)
+## 6.6.1 (Unreleased)
+
+- ...
+
+## 6.6.0 (2023-03-06)
 
 - New .env based configuration docker
 - Control services startup based on healthchecks
 - Thanks to @tibroc for adding hostnames to rabbitmq services
-- Thanks to @ralfyang for updating shell scripts to use latest docker version 
-
+- Thanks to @ralfyang for updating shell scripts to use latest docker version
 
 ## 6.5.0 (2022-01-24)
 
