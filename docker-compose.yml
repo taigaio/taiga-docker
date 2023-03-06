@@ -87,6 +87,7 @@ services:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
       RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
+    hostname: "taiga-async-rabbitmq"
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 2s
@@ -128,6 +129,7 @@ services:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
       RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
+    hostname: "taiga-events-rabbitmq"
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 2s

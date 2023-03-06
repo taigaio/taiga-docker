@@ -4,6 +4,7 @@
 
 - New .env based configuration docker
 - Control services startup based on healthchecks
+- Thanks to @tibroc for adding hostnames to rabbitmq services
 
 ## 6.5.0 (2022-01-24)
 
