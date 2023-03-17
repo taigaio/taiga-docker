@@ -6,7 +6,8 @@
 | :information_source: | If you're already using taiga-docker, follow this [migration guide](https://docs.taiga.io/upgrades-docker-migrate.html) to use the new `.env` based deployment. |
 |---------------|:----|
 
-**Note:** You can access the [older docker installation guide](https://docs.taiga.io/setup-production.old.html#setup-prod-with-docker-old) for documentation purposes, intended just for earlier versions of Taiga (prior to ver. 6.6.0)
+> **Note:**
+> You can access the [older docker installation guide](https://docs.taiga.io/setup-production.old.html#setup-prod-with-docker-old) for documentation purposes, intended just for earlier versions of Taiga (prior to ver. 6.6.0)
 
 
 ## Getting Started
@@ -17,7 +18,8 @@ If you don't have docker installed, please follow installation instructions from
 
 Additionally, it's necessary to have familiarity with Docker, docker compose and Docker repositories.
 
-**Note** branch `stable` should be used to deploy Taiga in production and `main` branch for development purposes.
+> **Note**
+> branch `stable` should be used to deploy Taiga in production and `main` branch for development purposes.
 
 ### Start the application
 
@@ -199,14 +201,14 @@ You can opt out by setting this variable to False. By default, it's True.
 
 All these customization options are by default disabled and require you to edit `docker-compose.yml`.
 
-You should add the corresponding environment variables in the proper services with a valid value in order to enable them. Please, do not modify it unless you know what you’re doing.
+You should add the corresponding environment variables in the proper services (or in `&default-back-environment` group) with a valid value in order to enable them. Please, do not modify it unless you know what you’re doing.
 
 ### Session cookies in Django Admin
 
 Taiga doesn't use session cookies in its API as it stateless. However, the Django Admin (`/admin/`) uses session cookie for authentication. By default, Taiga is configured to work behind HTTPS. If you're using HTTP (despite the strong recommendations against it), you'll need to configure the following environment variables so you can access the Admin:
 
-Service: `taiga-back`
-``` bash
+Add to `&default-back-environment` environments
+```yml
 SESSION_COOKIE_SECURE: "False"
 CSRF_COOKIE_SECURE: "False"
 ```
@@ -215,41 +217,49 @@ More info about those variables can be found [here](https://docs.djangoproject.c
 
 ### Public registration
 
-If you want to allow a public register, configure this variable to "True". By default it's "False". The value should be the same in `taiga-front` and `taiga-back`.
+Public registration is disabled by default. If you want to allow a public register, you have to enable public registration on both, frontend and backend.
 
-Service: `taiga-back`
+> **Note**
+> Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
-```bash
+
+Add to `&default-back-environment` environments
+```yml
 PUBLIC_REGISTER_ENABLED: "True"
 ```
 
-Service: `taiga-front`
-```bash
+Add to `taiga-front` service environments
+```yml
 PUBLIC_REGISTER_ENABLED: "true"
 ```
 
-**Important**: Taiga (in its default configuration) disables both Gitlab or Github oauth buttons whenever the public registration option hasn't been activated. To be able to use Github/ Gitlab login/registration, make sure you have public registration activated on your Taiga instance.
+> **Important**:
+>
+> Taiga (in its default configuration) disables both Gitlab or Github oauth buttons whenever the public registration option hasn't been activated. To be able to use Github/Gitlab login/registration, make sure you have public registration activated on your Taiga instance.
 
 ### GitHub OAuth login
 
-Used for login with Github.
+Used for login with Github. This feature is disabled by default.
 
-Follow the [documentation](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app) in Github, when save application Github displays the ID and Secret.
+Follow the documentation ([GitHub - Creating an OAuth App](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)) in Github, when save application Github displays the ID and Secret.
 
-Set variables in docker-compose.yml:
+> **Note** 
+> Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
-**Note** `ENABLE_GITHUB_AUTH` and `GITHUB_API_CLIENT_ID / GITHUB_CLIENT_ID` should have the same value in `taiga-back` and `taiga-front` services.
+> **Note**
+> `GITHUB_API_CLIENT_ID / GITHUB_CLIENT_ID` should have the same value.
 
-Service: `taiga-back`
-```bash
+
+Add to `&default-back-environment` environments
+```yml
 ENABLE_GITHUB_AUTH: "True"
 GITHUB_API_CLIENT_ID: "github-client-id"
 GITHUB_API_CLIENT_SECRET: "github-client-secret"
 PUBLIC_REGISTER_ENABLED: "True"
 ```
 
-Service: `taiga-front`
-```bash
+Add to `taiga-front` service environments
+```yml
 ENABLE_GITHUB_AUTH: "true"
 GITHUB_CLIENT_ID: "github-client-id"
 PUBLIC_REGISTER_ENABLED: "true"
@@ -257,16 +267,18 @@ PUBLIC_REGISTER_ENABLED: "true"
 
 ### Gitlab OAuth login
 
-Used for login with GitLab.
+Used for login with GitLab. This feature is disabled by default.
 
-Follow the [documentation](https://docs.gitlab.com/ee/integration/oauth_provider.html) in Gitlab, when save application GitLab displays the ID and Secret.
+Follow the documentation ([Configure GitLab as an OAuth 2.0 authentication identity provider](https://docs.gitlab.com/ee/integration/oauth_provider.html)) in Gitlab to get the _gitlab-client-id_ and the _gitlab-client-secret_.
 
-Set variables in docker-compose.yml:
+> **Note** 
+> Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
-**Note** `ENABLE_GITLAB_AUTH`, `GITLAB_API_CLIENT_ID / GITLAB_CLIENT_ID` and `GITLAB_URL` should have the same value in `taiga-back` and `taiga-front` services.
+> **Note** 
+> `GITLAB_API_CLIENT_ID / GITLAB_CLIENT_ID` and `GITLAB_URL` should have the same value.
 
-Service: `taiga-back`
-```bash
+Add to `&default-back-environment` environments
+```yml
 ENABLE_GITLAB_AUTH: "True"
 GITLAB_API_CLIENT_ID: "gitlab-client-id"
 GITLAB_API_CLIENT_SECRET: "gitlab-client-secret"
@@ -274,8 +286,8 @@ GITLAB_URL: "gitlab-url"
 PUBLIC_REGISTER_ENABLED: "True"
 ```
 
-Service: `taiga-front`
-```bash
+Add to `taiga-front` service environments
+```yml
 ENABLE_GITLAB_AUTH: "true"
 GITLAB_CLIENT_ID: "gitlab-client-id"
 GITLAB_URL: "gitlab-url"
@@ -284,59 +296,85 @@ PUBLIC_REGISTER_ENABLED: "true"
 
 ### Slack integration
 
-Enable Slack integration in your Taiga instance. By default, it's "False". Should have the same value as this variable in `taiga-front` and `taiga-back`.
+Enable Slack integration in your Taiga instance. This feature is disabled by default.
 
-Service: `taiga-back`
-```bash
+> **Note** 
+> Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
+
+Add to `&default-back-environment` environments
+```yml
 ENABLE_SLACK: "True"
 ```
 
-Service: `taiga-front`
-
-```
+Add to `taiga-front` service environments
+```yml
 ENABLE_SLACK: "true"
 ```
 
 ### GitHub importer
 
-Service: `taiga-back`
-```bash
+Activating this feature, you will be able to import projects from GitHub.
+
+Follow this documentation ([GitHub - Creating an OAuth App](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)) to obtain the _client id_ and the _client secret_ from GitHun.
+
+> **Note**
+> Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
+
+Add to `&default-back-environment` environments
+```yml
 ENABLE_GITHUB_IMPORTER: "True"
 GITHUB_IMPORTER_CLIENT_ID: "client-id-from-github"
 GITHUB_IMPORTER_CLIENT_SECRET: "client-secret-from-github"
 ```
 
-Service: `taiga-front`
-```bash
+Add to `taiga-front` service environments
+```yml
 ENABLE_GITHUB_IMPORTER: "true"
 ```
 
 ### Jira Importer
 
-Service: `taiga-back`
-```bash
+Activating this feature, you will be able to import projects from Jira.
+
+Follow this documentation ([Jira - OAuth 1.0a for REST APIs](https://developer.atlassian.com/cloud/jira/platform/jira-rest-api-oauth-authentication/)) to obtain the _consumer key_ and the _public/private certificate key_.     
+
+
+> **Note** 
+> Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
+
+Add to `&default-back-environment` environments
+```yml
 ENABLE_JIRA_IMPORTER: "True"
 JIRA_IMPORTER_CONSUMER_KEY: "consumer-key-from-jira"
 JIRA_IMPORTER_CERT: "cert-from-jira"
 JIRA_IMPORTER_PUB_CERT: "pub-cert-from-jira"
 ```
 
-Service: `taiga-front`
-```bash
+Add to `taiga-front` service environments
+```yml
 ENABLE_JIRA_IMPORTER: "true"
 ```
 
 ### Trello importer
 
-Service: `taiga-back`
-```bash
+Activating this feature, you will be able to import projects from Trello.
+
+For configure Trello, you have two options:
+- go to [https://trello.com/app-key](https://trello.com/app-key) (you must login first) and obtaing your development _API key_ and your _secret key_.
+- or with the new method, [create a new Power-Up](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key) and generate an _API key_ and a _secret key_
+
+> **Note** 
+> Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
+
+Add to `&default-back-environment` environments
+```yml
 ENABLE_TRELLO_IMPORTER: "True"
 TRELLO_IMPORTER_API_KEY: "api-key-from-trello"
 TRELLO_IMPORTER_SECRET_KEY: "secret-key-from-trello"
 ```
 
-Service: `taiga-front`
-```bash
+Add to `taiga-front` service environments
+```yml
 ENABLE_TRELLO_IMPORTER: "true"
 ```
 
