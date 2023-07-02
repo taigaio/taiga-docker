@@ -17,7 +17,7 @@ services:
   penpot-frontend:
     image: "penpotapp/frontend:latest"
     ports:
-      - 9001:80
+      - 9001:800
 
     volumes:
       - penpot_assets_data:/opt/data
