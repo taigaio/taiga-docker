@@ -64,9 +64,9 @@ services:
       taiga-db:
         condition: service_healthy
       taiga-events-rabbitmq:
-        condition: service_healthy
+        condition: service_started
       taiga-async-rabbitmq:
-        condition: service_healthy
+        condition: service_started
 
   taiga-async:
     image: taigaio/taiga-back:latest
@@ -79,9 +79,9 @@ services:
       taiga-db:
         condition: service_healthy
       taiga-events-rabbitmq:
-        condition: service_healthy
+        condition: service_started
       taiga-async-rabbitmq:
-        condition: service_healthy
+        condition: service_started
 
   taiga-async-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -91,12 +91,6 @@ services:
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
       RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
     hostname: "taiga-async-rabbitmq"
-    healthcheck:
-      test: rabbitmq-diagnostics -q ping
-      interval: 2s
-      timeout: 15s
-      retries: 5
-      start_period: 3s
     volumes:
       - taiga-async-rabbitmq-data:/var/lib/rabbitmq
     networks:
@@ -124,7 +118,7 @@ services:
       - taiga
     depends_on:
       taiga-events-rabbitmq:
-        condition: service_healthy
+        condition: service_started
 
   taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -134,12 +128,6 @@ services:
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
       RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
     hostname: "taiga-events-rabbitmq"
-    healthcheck:
-      test: rabbitmq-diagnostics -q ping
-      interval: 2s
-      timeout: 15s
-      retries: 5
-      start_period: 3s
     volumes:
       - taiga-events-rabbitmq-data:/var/lib/rabbitmq
     networks:
