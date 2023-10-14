@@ -476,7 +476,7 @@ If Taiga is being served in a **subdomain**:
 ```
   server {
       server_name taiga.mycompany.com;
-      
+
       location / {
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -484,12 +484,12 @@ If Taiga is being served in a **subdomain**:
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_redirect off;
-        proxy_pass http://localhost:9000/;
+        proxy_pass http://taiga-front/;
       }
-      
+
       # Events
       location /events {
-        proxy_pass http://localhost:9000/events;
+        proxy_pass http://taiga-events:8888/events;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -498,7 +498,7 @@ If Taiga is being served in a **subdomain**:
         proxy_send_timeout 7d;
         proxy_read_timeout 7d;
       }
-  
+
       # TLS: Configure your TLS following the best practices inside your company
       # Logs and other configurations
   }
@@ -508,7 +508,7 @@ If Taiga is being served in a **subpath** instead of a subdomain, the configurat
 ```
 server {
   server_name mycompany.com;
-  
+
   location /taiga/ {
     proxy_set_header Host $http_host;
     proxy_set_header X-Real-IP $remote_addr;
@@ -516,12 +516,12 @@ server {
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_redirect off;
-    proxy_pass http://localhost:9000/;
+    proxy_pass http://taiga-front/;
   }
-  
+
   # Events
   location /taiga/events {
-    proxy_pass http://localhost:9000/events;
+    proxy_pass http://taiga-events:8888/events;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
@@ -530,7 +530,7 @@ server {
     proxy_send_timeout 7d;
     proxy_read_timeout 7d;
   }
-  
+
   # TLS: Configure your TLS following the best practices inside your company
   # Logs and other configurations
 }
