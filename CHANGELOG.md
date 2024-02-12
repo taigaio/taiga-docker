@@ -2,6 +2,12 @@
 
 ## 6.7.2 (Unreleased)
 
+- ...
+
+## 6.7.2 (2024-02-12)
+
+- Add some missed settings (email service and instance domain) to docker-compose-inits.yml
+
 ## 6.7.1 (2023-08-08)
 
 - Fixes high CPU peaks for rabbitmq services
