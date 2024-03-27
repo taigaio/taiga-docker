@@ -12,7 +12,7 @@ There are many different ways to contribute to Taiga's platform, from patches, t
 
 ## Issues
 
-If you find a bug in the source code, you can help us by [submitting an issue](https://github.com/kaleidos-ventures/taiga-docker/issues/new/choose). Even better, you can submit a Pull Request with a fix.
+If you find a bug in the source code, you can help us by [submitting an issue](https://github.com/taigaio/taiga-docker/issues/new/choose). Even better, you can submit a Pull Request with a fix.
 
 ## Commit Message Guidelines
 
