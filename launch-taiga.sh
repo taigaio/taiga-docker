@@ -7,4 +7,4 @@
 # Copyright (c) 2021-present Kaleidos INC
 
 set -x
-exec docker compose -f docker-compose.yml up -d $@
+exec docker-compose -f docker-compose.yml up -d $@
