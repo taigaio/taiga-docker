@@ -23,11 +23,19 @@ Additionally, it's necessary to have familiarity with Docker, docker compose and
 
 ### Start the application
 
+To start, pull this reporsitory, navigate to the project's root directory and run the command:
+
 ```sh
 $ ./launch-all.sh
 ```
 
-After some instants, when the application is started you can proceed to create the superuser with the following script:
+Next, you'll have to execute the migrations. This step is crucial for configuring the database properly. To do this, simply run the following command:
+
+```sh
+$ ./taiga-manage.sh migrate
+```
+
+Once the migration is completed and the application is running, you can proceed to create the superuser with the following script:
 
 ```sh
 $ ./taiga-manage.sh createsuperuser
