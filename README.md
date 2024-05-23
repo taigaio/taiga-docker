@@ -1,8 +1,5 @@
 # Taiga Docker
 
-| :exclamation: | We recently announced Taiga plans for the future and they greatly affect how we manage this repository and the current Taiga 6 release. Check it [here](https://blog.taiga.io/announcing_taiganext.html).    |
-|---------------|:----|
-
 | :information_source: | If you're already using taiga-docker, follow this [migration guide](https://docs.taiga.io/upgrades-docker-migrate.html) to use the new `.env` based deployment. |
 |---------------|:----|
 
@@ -24,7 +21,7 @@ Additionally, it's necessary to have familiarity with Docker, docker compose and
 ### Start the application
 
 ```sh
-$ ./launch-all.sh
+$ ./launch-taiga.sh
 ```
 
 After some instants, when the application is started you can proceed to create the superuser with the following script:
@@ -43,14 +40,6 @@ $ ./taiga-manage.sh [COMMAND]
 If you're testing it in your own machine, you can access the application in **http://localhost:9000**. If you're deploying in a server, you'll need to configure hosts and nginx as described later.
 
 ![Taiga screenshot](imgs/taiga.jpg)
-
-As **EXTRA**: the default `launch-all.sh` script comes with [penpot](https://penpot.app), the open-source solution for design and prototyping. The default access for the penpot application is **http://localhost:9001**
-
-It's developed by the same team behind Taiga. If you want to give it a try, you can go to [penpot's github](https://github.com/penpot/penpot) or the [help center](https://help.penpot.app/technical-guide/configuration/) to review its own configuration variables.
-
-![Penpot screenshot](imgs/penpot.jpg)
-
-And finally if you just want to launch Taiga standalone, you can use the `launch-taiga.sh` script instead of the `launch-all.sh`.
 
 ## Documentation
 
@@ -243,7 +232,7 @@ Used for login with Github. This feature is disabled by default.
 
 Follow the documentation ([GitHub - Creating an OAuth App](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)) in Github, when save application Github displays the ID and Secret.
 
-> **Note** 
+> **Note**
 > Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
 > **Note**
@@ -271,10 +260,10 @@ Used for login with GitLab. This feature is disabled by default.
 
 Follow the documentation ([Configure GitLab as an OAuth 2.0 authentication identity provider](https://docs.gitlab.com/ee/integration/oauth_provider.html)) in Gitlab to get the _gitlab-client-id_ and the _gitlab-client-secret_.
 
-> **Note** 
+> **Note**
 > Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
-> **Note** 
+> **Note**
 > `GITLAB_API_CLIENT_ID / GITLAB_CLIENT_ID` and `GITLAB_URL` should have the same value.
 
 Add to `&default-back-environment` environments
@@ -298,7 +287,7 @@ PUBLIC_REGISTER_ENABLED: "true"
 
 Enable Slack integration in your Taiga instance. This feature is disabled by default.
 
-> **Note** 
+> **Note**
 > Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
 Add to `&default-back-environment` environments
@@ -336,10 +325,10 @@ ENABLE_GITHUB_IMPORTER: "true"
 
 Activating this feature, you will be able to import projects from Jira.
 
-Follow this documentation ([Jira - OAuth 1.0a for REST APIs](https://developer.atlassian.com/cloud/jira/platform/jira-rest-api-oauth-authentication/)) to obtain the _consumer key_ and the _public/private certificate key_.     
+Follow this documentation ([Jira - OAuth 1.0a for REST APIs](https://developer.atlassian.com/cloud/jira/platform/jira-rest-api-oauth-authentication/)) to obtain the _consumer key_ and the _public/private certificate key_.
 
 
-> **Note** 
+> **Note**
 > Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
 Add to `&default-back-environment` environments
@@ -363,7 +352,7 @@ For configure Trello, you have two options:
 - go to [https://trello.com/app-key](https://trello.com/app-key) (you must login first) and obtaing your development _API key_ and your _secret key_.
 - or with the new method, [create a new Power-Up](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key) and generate an _API key_ and a _secret key_
 
-> **Note** 
+> **Note**
 > Be careful with the upper and lower case in these settiings. We will use 'True' for the backend and 'true' for the frontend (this is not a typo, otherwise it won't work).
 
 Add to `&default-back-environment` environments
@@ -476,7 +465,7 @@ If Taiga is being served in a **subdomain**:
 ```
   server {
       server_name taiga.mycompany.com;
-      
+
       location / {
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -486,7 +475,7 @@ If Taiga is being served in a **subdomain**:
         proxy_redirect off;
         proxy_pass http://localhost:9000/;
       }
-      
+
       # Events
       location /events {
         proxy_pass http://localhost:9000/events;
@@ -498,7 +487,7 @@ If Taiga is being served in a **subdomain**:
         proxy_send_timeout 7d;
         proxy_read_timeout 7d;
       }
-  
+
       # TLS: Configure your TLS following the best practices inside your company
       # Logs and other configurations
   }
@@ -508,7 +497,7 @@ If Taiga is being served in a **subpath** instead of a subdomain, the configurat
 ```
 server {
   server_name mycompany.com;
-  
+
   location /taiga/ {
     proxy_set_header Host $http_host;
     proxy_set_header X-Real-IP $remote_addr;
@@ -518,7 +507,7 @@ server {
     proxy_redirect off;
     proxy_pass http://localhost:9000/;
   }
-  
+
   # Events
   location /taiga/events {
     proxy_pass http://localhost:9000/events;
@@ -530,7 +519,7 @@ server {
     proxy_send_timeout 7d;
     proxy_read_timeout 7d;
   }
-  
+
   # TLS: Configure your TLS following the best practices inside your company
   # Logs and other configurations
 }
