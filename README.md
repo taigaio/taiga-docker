@@ -473,12 +473,12 @@ If Taiga is being served in a **subdomain**:
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_redirect off;
-        proxy_pass http://localhost:9000/;
+        proxy_pass http://taiga-front/;
       }
 
       # Events
       location /events {
-        proxy_pass http://localhost:9000/events;
+        proxy_pass http://taiga-events:8888/events;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -505,12 +505,12 @@ server {
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_redirect off;
-    proxy_pass http://localhost:9000/;
+    proxy_pass http://taiga-front/;
   }
 
   # Events
   location /taiga/events {
-    proxy_pass http://localhost:9000/events;
+    proxy_pass http://taiga-events:8888/events;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
