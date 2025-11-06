@@ -82,6 +82,10 @@ services:
         condition: service_started
       taiga-async-rabbitmq:
         condition: service_started
+    ulimits:
+      nofile:
+        soft: 32768
+        hard: 32768
 
   taiga-async-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -95,6 +99,10 @@ services:
       - taiga-async-rabbitmq-data:/var/lib/rabbitmq
     networks:
       - taiga
+    ulimits:
+      nofile:
+        soft: 32768
+        hard: 32768
 
   taiga-front:
     image: taigaio/taiga-front:latest
@@ -132,6 +140,10 @@ services:
       - taiga-events-rabbitmq-data:/var/lib/rabbitmq
     networks:
       - taiga
+    ulimits:
+      nofile:
+        soft: 32768
+        hard: 32768
 
   taiga-protected:
     image: taigaio/taiga-protected:latest
