@@ -5,28 +5,28 @@ x-environment:
   # These environment variables will be used by taiga-back and taiga-async.
   # Database settings
   POSTGRES_DB: "taiga"
-  POSTGRES_USER: "${POSTGRES_USER}"
-  POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+  POSTGRES_USER: "${POSTGRES_USER:-taiga}"
+  POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-taiga}"
   POSTGRES_HOST: "taiga-db"
   # Taiga settings
-  TAIGA_SECRET_KEY: "${SECRET_KEY}"
-  TAIGA_SITES_SCHEME: "${TAIGA_SCHEME}"
-  TAIGA_SITES_DOMAIN: "${TAIGA_DOMAIN}"
-  TAIGA_SUBPATH: "${SUBPATH}"
+  TAIGA_SECRET_KEY: "${SECRET_KEY:-taiga-secret-key}"
+  TAIGA_SITES_SCHEME: "${TAIGA_SCHEME:-https}"
+  TAIGA_SITES_DOMAIN: "${TAIGA_DOMAIN:-localhost:9000}"
+  TAIGA_SUBPATH: "${SUBPATH:-}"
   # Email settings.
-  EMAIL_BACKEND: "django.core.mail.backends.${EMAIL_BACKEND}.EmailBackend"
-  DEFAULT_FROM_EMAIL: "${EMAIL_DEFAULT_FROM}"
-  EMAIL_USE_TLS: "${EMAIL_USE_TLS}"
-  EMAIL_USE_SSL: "${EMAIL_USE_SSL}"
-  EMAIL_HOST: "${EMAIL_HOST}"
-  EMAIL_PORT: "${EMAIL_PORT}"
-  EMAIL_HOST_USER: "${EMAIL_HOST_USER}"
-  EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD}"
+  EMAIL_BACKEND: "django.core.mail.backends.${EMAIL_BACKEND:-console}.EmailBackend"
+  DEFAULT_FROM_EMAIL: "${EMAIL_DEFAULT_FROM:-changeme@example.com}"
+  EMAIL_USE_TLS: "${EMAIL_USE_TLS:-True}"
+  EMAIL_USE_SSL: "${EMAIL_USE_SSL:-False}"
+  EMAIL_HOST: "${EMAIL_HOST:-smtp.host.example.com}"
+  EMAIL_PORT: "${EMAIL_PORT:-587}"
+  EMAIL_HOST_USER: "${EMAIL_HOST_USER:-user}"
+  EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD:-password}"
   # Rabbitmq settings
-  RABBITMQ_USER: "${RABBITMQ_USER}"
-  RABBITMQ_PASS: "${RABBITMQ_PASS}"
+  RABBITMQ_USER: "${RABBITMQ_USER:-taiga}"
+  RABBITMQ_PASS: "${RABBITMQ_PASS:-taiga}"
   # Telemetry settings
-  ENABLE_TELEMETRY: "${ENABLE_TELEMETRY}"
+  ENABLE_TELEMETRY: "${ENABLE_TELEMETRY:-True}"
   # ...your customizations go here
 
 x-volumes:
@@ -39,12 +39,13 @@ x-volumes:
 services:
   taiga-db:
     image: postgres:12.3
+    restart: unless-stopped
     environment:
       POSTGRES_DB: "taiga"
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_USER: "${POSTGRES_USER:-taiga}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-taiga}"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-taiga}"]
       interval: 2s
       timeout: 15s
       retries: 5
@@ -56,6 +57,7 @@ services:
 
   taiga-back:
     image: taigaio/taiga-back:latest
+    restart: unless-stopped
     environment: *default-back-environment
     volumes: *default-back-volumes
     networks:
@@ -70,6 +72,7 @@ services:
 
   taiga-async:
     image: taigaio/taiga-back:latest
+    restart: unless-stopped
     entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
     environment: *default-back-environment
     volumes: *default-back-volumes
@@ -85,11 +88,12 @@ services:
 
   taiga-async-rabbitmq:
     image: rabbitmq:3.8-management-alpine
+    restart: unless-stopped
     environment:
-      RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
-      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
-      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
-      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
+      RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE:-secret-erlang-cookie}"
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER:-taiga}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS:-taiga}"
+      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST:-taiga}"
     hostname: "taiga-async-rabbitmq"
     volumes:
       - taiga-async-rabbitmq-data:/var/lib/rabbitmq
@@ -98,10 +102,11 @@ services:
 
   taiga-front:
     image: taigaio/taiga-front:latest
+    restart: unless-stopped
     environment:
-      TAIGA_URL: "${TAIGA_SCHEME}://${TAIGA_DOMAIN}"
-      TAIGA_WEBSOCKETS_URL: "${WEBSOCKETS_SCHEME}://${TAIGA_DOMAIN}"
-      TAIGA_SUBPATH: "${SUBPATH}"
+      TAIGA_URL: "${TAIGA_SCHEME:-https}://${TAIGA_DOMAIN:-localhost:9000}"
+      TAIGA_WEBSOCKETS_URL: "${WEBSOCKETS_SCHEME:-wss}://${TAIGA_DOMAIN:-localhost:9000}"
+      TAIGA_SUBPATH: "${SUBPATH:-}"
       # ...your customizations go here
     networks:
       - taiga
@@ -110,10 +115,11 @@ services:
 
   taiga-events:
     image: taigaio/taiga-events:latest
+    restart: unless-stopped
     environment:
-      RABBITMQ_USER: "${RABBITMQ_USER}"
-      RABBITMQ_PASS: "${RABBITMQ_PASS}"
-      TAIGA_SECRET_KEY: "${SECRET_KEY}"
+      RABBITMQ_USER: "${RABBITMQ_USER:-taiga}"
+      RABBITMQ_PASS: "${RABBITMQ_PASS:-taiga}"
+      TAIGA_SECRET_KEY: "${SECRET_KEY:-taiga-secret-key}"
     networks:
       - taiga
     depends_on:
@@ -122,11 +128,12 @@ services:
 
   taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
+    restart: unless-stopped
     environment:
-      RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
-      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
-      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS}"
-      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST}"
+      RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE:-secret-erlang-cookie}"
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER:-taiga}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASS:-taiga}"
+      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_VHOST:-taiga}"
     hostname: "taiga-events-rabbitmq"
     volumes:
       - taiga-events-rabbitmq-data:/var/lib/rabbitmq
@@ -135,16 +142,18 @@ services:
 
   taiga-protected:
     image: taigaio/taiga-protected:latest
+    restart: unless-stopped
     environment:
-      MAX_AGE: "${ATTACHMENTS_MAX_AGE}"
-      SECRET_KEY: "${SECRET_KEY}"
+      MAX_AGE: "${ATTACHMENTS_MAX_AGE:-360}"
+      SECRET_KEY: "${SECRET_KEY:-taiga-secret-key}"
     networks:
       - taiga
 
   taiga-gateway:
     image: nginx:1.19-alpine
+    restart: unless-stopped
     ports:
-      - "9000:80"
+      - "${PORT:-9000}:80"
     volumes:
       - ./taiga-gateway/taiga.conf:/etc/nginx/conf.d/default.conf
       - taiga-static-data:/taiga/static
