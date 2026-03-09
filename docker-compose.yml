@@ -1,4 +1,4 @@
-version: "3.5"
+# The version display is removed
 
 x-environment:
   &default-back-environment
