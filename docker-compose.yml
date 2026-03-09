@@ -1,4 +1,3 @@
-version: "3.5"
 
 x-environment:
   &default-back-environment
