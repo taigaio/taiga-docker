@@ -550,3 +550,16 @@ After modifying the configuration, restart the containers:
 
 docker compose down
 ./launch-taiga.sh
+
+## Public Registration and Secret Key Configuration
+
+### Enabling Public Registration
+
+By default, Taiga Docker deployments disable public user registration.
+To allow users to create accounts directly from the login page, add the
+following configuration to `docker-compose.yml`.
+
+In the backend shared environment:
+
+```yaml
+PUBLIC_REGISTER_ENABLED: "True"
