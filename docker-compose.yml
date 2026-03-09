@@ -1,3 +1,4 @@
+# The version display is removed
 
 x-environment:
   &default-back-environment
