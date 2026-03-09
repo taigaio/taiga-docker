@@ -528,3 +528,25 @@ server {
 ## Change between subpath and subdomain
 
 If you're changing Taiga configuration from default subdomain (https://taiga.mycompany.com) to subpath (http://mycompany.com/subpath) or vice versa, on top of adjusting the configuration as said above, you should consider changing the TAIGA_SECRET_KEY so the refresh works properly for the end user.
+
+## Accessing Taiga from Other Devices on the Local Network
+
+By default, Taiga may use:
+
+TAIGA_DOMAIN=localhost:9000
+
+This only works when accessing the service from the same machine.
+
+To allow access from other devices on the same network, update the
+`.env` configuration to use the host machine's local IPv4 address:
+
+TAIGA_DOMAIN=<your-local-ip>:9000
+
+Example:
+
+TAIGA_DOMAIN=192.168.1.25:9000
+
+After modifying the configuration, restart the containers:
+
+docker compose down
+./launch-taiga.sh
