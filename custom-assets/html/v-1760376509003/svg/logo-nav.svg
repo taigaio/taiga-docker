@@ -1,0 +1,44 @@
+<svg class="logo-nav" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134.2 134.3" version="1.1" preserveAspectRatio="xMidYMid meet">
+    <style>
+        .top {
+            -webkit-transform-origin: 50% 50%;
+            transform: rotate(0deg);
+        }
+        .logo-nav path{
+            fill:#fff;
+            opacity: .6;
+        }
+        .logo-nav svg:hover .top {
+            transform: rotate(90deg);
+            transition: all .3s ease-in;
+        }
+        .logo-nav svg:hover {
+            cursor: pointer;
+        }
+        @-webkit-keyframes rotate {
+            50% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes rotate {
+            50% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <g transform="translate(-307.87667,-465.22863)">
+        <g class="bottom">
+            <path transform="matrix(-0.14066483,0.99005727,-0.99005727,0.14066483,0,0)" d="m561.8-506.6 42 0 0 42-42 0z" />
+            <path transform="matrix(0.14066483,-0.99005727,0.99005727,-0.14066483,0,0)" d="m-645.7 422.6 42 0 0 42-42 0z" />
+            <path transform="matrix(0.99005727,0.14066483,0.14066483,0.99005727,0,0)" d="m266.6 451.9 42 0 0 42-42 0z" />
+            <path transform="matrix(-0.99005727,-0.14066483,-0.14066483,-0.99005727,0,0)" d="m-350.6-535.9 42 0 0 42-42 0z" />
+        </g>
+        <g class="top">
+            <path transform="matrix(-0.60061118,-0.79954125,0.60061118,-0.79954125,0,0)" d="m-687.1-62.7 42 0 0 42-42 0z" />
+            <path transform="matrix(-0.79954125,0.60061118,-0.79954125,-0.60061118,0,0)" d="m166.6-719.6 42 0 0 42-42 0z" />
+            <path transform="matrix(0.60061118,0.79954125,-0.60061118,0.79954125,0,0)" d="m603.1-21.3 42 0 0 42-42 0z" />
+            <path transform="matrix(0.79954125,-0.60061118,0.79954125,0.60061118,0,0)" d="m-250.7 635.8 42 0 0 42-42 0z" />
+        </g>
+        <path class="center" transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)" d="m630.3 100 22.6 0 0 22.6-22.6 0z" />
+    </g>
+</svg>

@@ -1,0 +1,91 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+
+  Taiga Engineer & Digital Hermit: Lord Juan Francisco Alcántara
+  Site: http://www.kaleidos.net/40826D/
+  Twitter: nil
+  Location: Madrid, Spain
+
+  Taiga Engineer & Spartan: Lord Alejandro Alonso
+  Site: http://kaleidos.net/FC8EAC/
+  Twitter: @_superalex_
+  Location: Madrid, Spain
+
+  Taiga Engineer & Vodka distiller: Lord Andrey Antukh
+  Site: http://kaleidos.net/A5694F/
+  Twitter: @niwibe
+  Location: Madrid, Russia
+
+  Taiga Engineer & Grouchy Smurf: Lord David Barragán Merino
+  Site: http://kaleidos.net/FFF8E7/
+  Twitter: @bameda
+  Location: Madrid, Spain
+
+  Taiga Engineer & Troll Master: Lord Jesús Espino García
+  Site: http://kaleidos.net/007000/
+  Twitter: @jespinog
+  Location: Madrid, Spain
+
+  Taiga UX Consultant & Mistress of the Dark: Pilar Esteban
+  Site: https://www.linkedin.com/in/pilaresteban
+  Twitter: @devilme
+  Location: Madrid, Spain
+
+  Taiga Engineer & African Dancer: Anler Hernández
+  Site: http://www.kaleidos.net/2099DB/
+  Twitter: @anler
+  Location: Madrid, Cuba
+
+  Taiga UI Designer, Frontend Engineer & Paella Masterchef: Lord Xavier Julián
+  Site: http://kaleidos.net/CC0000/
+  Twitter: @Xaviju
+  Location: Madrid, Spain
+
+  Taiga UI Designer: Juan de la Cruz
+  Site: http://kaleidos.net
+  Twitter: @elhombretecla
+  Location: Madrid, Spain
+
+  Taiga UX Consultan & LEGO architect: Esther Moreno
+  Site: http://kaleidos.net
+  Twitter: @plumilla
+  Location: Madrid, Spain
+
+  Taiga CEO, Community Manager & Chico Almodóvar: Ricky Posner
+  Twitter: @eposner
+  Location: Madrid, Spain
+
+  Taiga CEO & Dungeon Master: Lord Pablo Ruiz Múzquiz
+  Site: http://kaleidos.net/761CEC/
+  Twitter: @diacritica
+  Location: Madrid, Spain
+
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Django, AngularJS, jQuery
+  Software: PostgreSQL, RabbitMQ, Redis
+  Languajes: Python, CoffeeScript, Jade, Sass
+
+
+            .,,.
+         ,;;*;;;;,         for ponies with
+        .-'``;-');;.       magical powers!
+       /'  .-.  /*;;
+     .'    \d    \;;               .;;;,
+    / o      `    \;    ,__.     ,;*;;;*;,
+    \__, _.__,'   \_.-') __)--.;;;;;*;;;;,
+     `""`;;;\       /-')_) __)  `\' ';;;;;;
+        ;*;;;        -') `)_)  |\ |  ;;;;*;
+        ;;;;|        `---`    O | | ;;*;;;
+        *;*;\|                 O  / ;;;;;*
+       ;;;;;/|    .-------\      / ;*;;;;;
+      ;;;*;/ \    |        '.   (`. ;;;*;;;
+      ;;;;;'. ;   |          )   \ | ;;;;;;
+      ,;*;;;;\/   |.        /   /` | ';;;*;
+       ;;;;;;/    |/       /   /__/   ';;;
+       '*jgs/     |       /    |      ;*;
+            `""""`        `""""`     ;'

@@ -1,0 +1,74 @@
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 134.2 134.3" preserveAspectRatio="xMidYMid meet">
+    <style>
+        .top {
+            transform-origin: 375px 532px;
+            -webkit-animation: rotate 4s cubic-bezier(.49,.05,.32,1.04) infinite alternate;
+            -webkit-transform-origin: 50% 50%;
+            animation: rotate 6s cubic-bezier(.49,.05,.32,1.04) infinite alternate;
+        }
+        .bottom path {
+            fill-opacity: 1;
+            fill: #9dce0a;
+            opacity: .2;
+        }
+        .top path {
+            fill-opacity: 1;
+            fill: #9dce0a;
+            opacity: .6;
+            animation: colorize 10s linear infinite alternate;
+            -webkit-animation: colorize 10s linear infinite alternate;
+        }
+        .braktearo {
+            fill-opacity: 1;
+            fill: #9dce0a;
+            opacity: .9;
+        }
+        @-webkit-keyframes rotate {
+            50% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes rotate {
+            50% {
+                transform: rotate(360deg);
+            }
+        }
+        @-webkit-keyframes colorize {
+            0% {
+                opacity: .6;
+            }
+            60% {
+                opacity: .0;
+            }
+            80% {
+                opacity: .6;
+            }
+        }
+        @keyframes colorize {
+            0% {
+                opacity: .6;
+            }
+            60% {
+                opacity: .0;
+            }
+            80% {
+                opacity: .6;
+            }
+        }
+    </style>
+    <g transform="translate(-307.87667,-465.22863)">
+        <g class="bottom">
+            <path transform="matrix(-0.14066483,0.99005727,-0.99005727,0.14066483,0,0)" d="m561.8-506.6 42 0 0 42-42 0z" />
+            <path transform="matrix(0.14066483,-0.99005727,0.99005727,-0.14066483,0,0)" d="m-645.7 422.6 42 0 0 42-42 0z" />
+            <path transform="matrix(0.99005727,0.14066483,0.14066483,0.99005727,0,0)" d="m266.6 451.9 42 0 0 42-42 0z" />
+            <path transform="matrix(-0.99005727,-0.14066483,-0.14066483,-0.99005727,0,0)" d="m-350.6-535.9 42 0 0 42-42 0z" />
+        </g>
+        <g class="top">
+            <path transform="matrix(-0.60061118,-0.79954125,0.60061118,-0.79954125,0,0)" d="m-687.1-62.7 42 0 0 42-42 0z" />
+            <path transform="matrix(-0.79954125,0.60061118,-0.79954125,-0.60061118,0,0)" d="m166.6-719.6 42 0 0 42-42 0z" />
+            <path transform="matrix(0.60061118,0.79954125,-0.60061118,0.79954125,0,0)" d="m603.1-21.3 42 0 0 42-42 0z" />
+            <path transform="matrix(0.79954125,-0.60061118,0.79954125,0.60061118,0,0)" d="m-250.7 635.8 42 0 0 42-42 0z" />
+            <path transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)" d="m630.3 100 22.6 0 0 22.6-22.6 0z" />
+        </g>
+    </g>
+</svg>

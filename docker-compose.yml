@@ -2,18 +2,16 @@ version: "3.5"
 
 x-environment:
   &default-back-environment
-  # These environment variables will be used by taiga-back and taiga-async.
-  # Database settings
   POSTGRES_DB: "taiga"
   POSTGRES_USER: "${POSTGRES_USER}"
   POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
   POSTGRES_HOST: "taiga-db"
-  # Taiga settings
+
   TAIGA_SECRET_KEY: "${SECRET_KEY}"
   TAIGA_SITES_SCHEME: "${TAIGA_SCHEME}"
   TAIGA_SITES_DOMAIN: "${TAIGA_DOMAIN}"
   TAIGA_SUBPATH: "${SUBPATH}"
-  # Email settings.
+
   EMAIL_BACKEND: "django.core.mail.backends.${EMAIL_BACKEND}.EmailBackend"
   DEFAULT_FROM_EMAIL: "${EMAIL_DEFAULT_FROM}"
   EMAIL_USE_TLS: "${EMAIL_USE_TLS}"
@@ -22,19 +20,16 @@ x-environment:
   EMAIL_PORT: "${EMAIL_PORT}"
   EMAIL_HOST_USER: "${EMAIL_HOST_USER}"
   EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD}"
-  # Rabbitmq settings
+
   RABBITMQ_USER: "${RABBITMQ_USER}"
   RABBITMQ_PASS: "${RABBITMQ_PASS}"
-  # Telemetry settings
+
   ENABLE_TELEMETRY: "${ENABLE_TELEMETRY}"
-  # ...your customizations go here
 
 x-volumes:
   &default-back-volumes
-  # These volumens will be used by taiga-back and taiga-async.
   - taiga-static-data:/taiga-back/static
   - taiga-media-data:/taiga-back/media
-  # - ./config.py:/taiga-back/settings/config.py
 
 services:
   taiga-db:
@@ -96,17 +91,11 @@ services:
     networks:
       - taiga
 
+  # ✅ YOUR CUSTOM FRONTEND
   taiga-front:
-    image: taigaio/taiga-front:latest
-    environment:
-      TAIGA_URL: "${TAIGA_SCHEME}://${TAIGA_DOMAIN}"
-      TAIGA_WEBSOCKETS_URL: "${WEBSOCKETS_SCHEME}://${TAIGA_DOMAIN}"
-      TAIGA_SUBPATH: "${SUBPATH}"
-      # ...your customizations go here
+    image: taiga-docker-taiga-front-xminds
     networks:
       - taiga
-    # volumes:
-    #   - ./conf.json:/usr/share/nginx/html/conf.json
 
   taiga-events:
     image: taigaio/taiga-events:latest
@@ -118,7 +107,7 @@ services:
       - taiga
     depends_on:
       taiga-events-rabbitmq:
-        condition: service_started
+        condition: service_healthy
 
   taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -132,6 +121,12 @@ services:
       - taiga-events-rabbitmq-data:/var/lib/rabbitmq
     networks:
       - taiga
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   taiga-protected:
     image: taigaio/taiga-protected:latest
@@ -141,6 +136,7 @@ services:
     networks:
       - taiga
 
+  # ✅ GATEWAY (no frontend volume anymore)
   taiga-gateway:
     image: nginx:1.19-alpine
     ports:

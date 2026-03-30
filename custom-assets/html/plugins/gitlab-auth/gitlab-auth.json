@@ -1,0 +1,9 @@
+{
+    "name": "GitLab Auth",
+    "slug": "gitlab-auth",
+    "description": "Authenticate with GitLab accounts.",
+    "type": "auth",
+    "module": "taigaContrib.gitlabAuth",
+    "template": "/plugins/gitlab-auth/gitlab-auth.html",
+    "js": "plugins/gitlab-auth/gitlab-auth.js"
+}
