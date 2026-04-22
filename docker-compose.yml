@@ -1,4 +1,4 @@
-version: "3.5"
+#version: "3.5"
 
 x-environment:
   &default-back-environment
@@ -29,6 +29,8 @@ x-environment:
   ENABLE_TELEMETRY: "${ENABLE_TELEMETRY}"
   # ...your customizations go here
 
+
+
 x-volumes:
   &default-back-volumes
   # These volumens will be used by taiga-back and taiga-async.
@@ -58,6 +60,13 @@ services:
     image: taigaio/taiga-back:latest
     environment: *default-back-environment
     volumes: *default-back-volumes
+    # custom modify here
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1', 8000)); s.close()\" || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     networks:
       - taiga
     depends_on:
@@ -103,6 +112,12 @@ services:
       TAIGA_WEBSOCKETS_URL: "${WEBSOCKETS_SCHEME}://${TAIGA_DOMAIN}"
       TAIGA_SUBPATH: "${SUBPATH}"
       # ...your customizations go here
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
     networks:
       - taiga
     # volumes:
